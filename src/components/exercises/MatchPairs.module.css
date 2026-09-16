@@ -1,0 +1,137 @@
+.wrapper {
+  background: white;
+  border-radius: 14px;
+  border: 2px solid #e8e8e8;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.instruction {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: #16a085;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  flex-shrink: 0;
+}
+
+/* ── Grid ────────────────────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.colLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #999;
+  margin-bottom: 2px;
+}
+
+/* ── Cards ───────────────────────────────────────────────────────────────── */
+.card {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 2px solid #e0e0e0;
+  background: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s, opacity 0.3s;
+  color: #1a1a2e;
+}
+
+.card.idle:hover {
+  border-color: #16a085;
+  background: #f0fdf9;
+  transform: translateY(-1px);
+}
+
+.card.selected {
+  border-color: #16a085;
+  background: #e0f7f2;
+  color: #0e6655;
+}
+
+.card.wrong {
+  border-color: #e74c3c;
+  background: #fff0ee;
+  color: #c0392b;
+  animation: shake 0.35s ease;
+}
+
+.card.matched {
+  border-color: #27ae60;
+  background: #f0fdf4;
+  color: #27ae60;
+  cursor: default;
+  opacity: 0.6;
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25%      { transform: translateX(-5px); }
+  75%      { transform: translateX(5px); }
+}
+
+/* ── Progress ────────────────────────────────────────────────────────────── */
+.progress {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #aaa;
+  text-align: right;
+}
+
+/* ── Done ────────────────────────────────────────────────────────────────── */
+.doneMsg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+  flex-wrap: wrap;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #16a085;
+}
+
+.doneEmoji { font-size: 1.6rem; }
+
+.resetBtn {
+  background: none;
+  border: 2px solid #16a085;
+  color: #16a085;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.resetBtn:hover { background: #16a085; color: white; }

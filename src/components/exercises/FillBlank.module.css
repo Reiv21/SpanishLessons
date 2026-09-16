@@ -1,0 +1,206 @@
+.wrapper {
+  background: white;
+  border-radius: 14px;
+  border: 2px solid #e8e8e8;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.2s;
+}
+
+.wrapper.correct { border-color: #27ae60; background: #f6fffa; }
+.wrapper.wrong   { border-color: #e74c3c; background: #fff6f5; }
+
+.instruction {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: #2980b9;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  flex-shrink: 0;
+}
+
+/* ── Polish question ─────────────────────────────────────────────────────── */
+.questionPl {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #555;
+  background: #f0f4ff;
+  border-left: 3px solid #2980b9;
+  padding: 8px 12px;
+  border-radius: 0 8px 8px 0;
+}
+
+/* ── Sentence ────────────────────────────────────────────────────────────── */
+.sentence {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  line-height: 1.8;
+}
+
+.sentencePart {
+  color: #c0392b;
+}
+
+.input {
+  border: none;
+  border-bottom: 3px solid #2980b9;
+  background: transparent;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  padding: 2px 4px;
+  min-width: 60px;
+  outline: none;
+  text-align: center;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+
+.input:focus { border-bottom-color: #1a6fa3; }
+
+.input_correct {
+  border-bottom-color: #27ae60;
+  color: #27ae60;
+}
+
+.input_wrong {
+  border-bottom-color: #e74c3c;
+  color: #e74c3c;
+  text-decoration: line-through;
+}
+
+/* ── Special character buttons ───────────────────────────────────────────── */
+.charButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.charBtn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  border-radius: 7px;
+  border: 2px solid #c8dff7;
+  background: #eef6ff;
+  color: #1a4a7a;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, transform 0.08s;
+  line-height: 1;
+  font-family: inherit;
+}
+
+.charBtn:hover {
+  background: #2980b9;
+  border-color: #2980b9;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.charBtn:active {
+  transform: translateY(0);
+}
+
+/* ── Feedback ────────────────────────────────────────────────────────────── */
+.translation {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.wrongNote {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #c0392b;
+}
+
+.hintToggle {
+  background: none;
+  border: none;
+  color: #f39c12;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0;
+  text-align: left;
+}
+.hintToggle:hover { text-decoration: underline; }
+
+.hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #7a5000;
+  background: #fff8ec;
+  border-left: 3px solid #f39c12;
+  padding: 8px 12px;
+  border-radius: 0 8px 8px 0;
+}
+
+/* ── Actions ─────────────────────────────────────────────────────────────── */
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.checkBtn {
+  background: #2980b9;
+  color: white;
+  border: none;
+  padding: 9px 22px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.checkBtn:hover:not(:disabled) { background: #1a6fa3; }
+.checkBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.resetBtn {
+  background: none;
+  border: 2px solid #2980b9;
+  color: #2980b9;
+  padding: 7px 18px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.resetBtn:hover { background: #2980b9; color: white; }
+
+.audioBtn {
+  background: none;
+  border: 2px solid #f39c12;
+  color: #f39c12;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.audioBtn:hover { background: #f39c12; color: white; }

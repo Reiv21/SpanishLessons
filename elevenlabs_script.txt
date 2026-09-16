@@ -1,0 +1,126 @@
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SKRYPT DO WYGENEROWANIA W ELEVENLABS — Testowa Hiszpania
+  Lekcja 1: Lotnisko El Prat
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Każda sekcja = jeden plik audio.
+Nazwa pliku podana przy każdej kwestii.
+Generuj osobno — jeden plik = jeden request w ElevenLabs.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  GŁOS: MAREK
+  Charakter: młody Polak (~30 lat), lekko zagubiony ale sympatyczny,
+  akcent polski słyszalny przy hiszpańskim — to celowe i naturalne.
+  Język: hiszpański (kwestie ES), naturalny, nie przesadzony.
+  Sugerowany głos ElevenLabs: "Antoni" / "Adam" / dowolny męski PL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+--- DIALOG 1: LOTNISKO ---
+
+[PLIK: d1_marek_01.mp3]
+Perdona… ¿dónde está mi maleta?
+
+[PLIK: d1_marek_02.mp3]
+No entiendo… ¿habla inglés?
+
+[PLIK: d1_marek_03.mp3]
+¡Gracias!
+
+--- DIALOG 2: TAKSÓWKA ---
+
+[PLIK: d2_marek_01.mp3]
+Sí, gracias. ¿Vamos al centro?
+
+[PLIK: d2_marek_02.mp3]
+Muchas gracias.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  GŁOS: PRACOWNICA LOTNISKA
+  Charakter: profesjonalna Hiszpanka, cierpliwa, lekko znużona,
+  mówi wyraźnie bo widzi że rozmawia z obcokrajowcem.
+  Język: hiszpański (kwestie ES) + jedna kwestia po angielsku.
+  Sugerowany głos ElevenLabs: "Rachel" / "Elli" / dowolny kobiecy EN/ES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+--- DIALOG 1: LOTNISKO ---
+
+[PLIK: d1_pracownica_01.mp3]
+¿Su número de vuelo, por favor?
+
+[PLIK: d1_pracownica_02.mp3]
+Sí, un poco. Your bag number?
+(uwaga: pierwsze zdanie po hiszpańsku, drugie po angielsku — jedna kwestia, jeden plik)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  GŁOS: KIEROWCA TAKSÓWKI
+  Charakter: rozmowny Katalończyk, energiczny, friendly,
+  mówi szybko i radośnie — typowy barceloński taksówkarz.
+  Język: hiszpański.
+  Sugerowany głos ElevenLabs: "Josh" / "Liam" / dowolny męski ES/EN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+--- DIALOG 2: TAKSÓWKA ---
+
+[PLIK: d2_kierowca_01.mp3]
+¡Hola! ¿Todo bien?
+
+[PLIK: d2_kierowca_02.mp3]
+¡Claro! Barcelona centre, perfecto.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  GŁOS: HIPEK (LEKTOR-NAUCZYCIEL)
+  Charakter: ciepły nauczyciel, mówi po polsku tłumacząc gramatykę,
+  przy wymowie przechodzi płynnie na hiszpański.
+  Spokojny, wyraźny, przyjazny — jak lektor audiobooków.
+  Sugerowany głos ElevenLabs: "Onwenu" / "Daniel" / dowolny męski PL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[PLIK: hipek_01.mp3]
+Uwaga na wymowę! "Gracias" czytamy "gra-sjas" — nie "gra-cias" jak po polsku.
+Spróbuj: gra-sjas. Jeszcze raz: gracias.
+
+[PLIK: hipek_02.mp3]
+W języku hiszpańskim każde pytanie zaczyna się od odwróconego znaku zapytania — ¿
+To nie błąd! To cecha hiszpańskiego pisma. Dzięki temu już na początku zdania wiesz, że to pytanie.
+
+[PLIK: hipek_03.mp3]
+W hiszpańskim są dwa czasowniki znaczące "być": ser i estar.
+"Estar" — czyli "está" — używamy dla miejsca i stanu tymczasowego.
+Dlatego "¿Dónde está?" — gdzie JEST (teraz, w tej chwili)?
+
+[PLIK: hipek_04.mp3]
+Mała ściągawka na sytuacje kryzysowe: po pierwsze — "No entiendo" — nie rozumiem.
+Po drugie — "¿Habla inglés?" — czy mówi pan po angielsku?
+Z tymi dwoma zwrotami przeżyjesz pierwsze dni w Hiszpanii.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  PODSUMOWANIE — lista plików do wygenerowania (13 plików)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Głos Marek (5 plików):
+    d1_marek_01.mp3
+    d1_marek_02.mp3
+    d1_marek_03.mp3
+    d2_marek_01.mp3
+    d2_marek_02.mp3
+
+  Głos Pracownica lotniska (2 pliki):
+    d1_pracownica_01.mp3
+    d1_pracownica_02.mp3
+
+  Głos Kierowca taksówki (2 pliki):
+    d2_kierowca_01.mp3
+    d2_kierowca_02.mp3
+
+  Głos Hipek (4 pliki):
+    hipek_01.mp3
+    hipek_02.mp3
+    hipek_03.mp3
+    hipek_04.mp3
+
+  Wszystkie pliki wrzuć do: /public/assets/audio/
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -1,0 +1,182 @@
+.wrapper {
+  background: #f8f4ff;
+  border-radius: 16px;
+  padding: 16px 16px 20px;
+  border: 1px solid #e0d4f7;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Toolbar ─────────────────────────────────────────────────────────────── */
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.playAllBtn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: white;
+  border: 2px solid #6c3fc5;
+  color: #6c3fc5;
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.playAllBtn:hover,
+.playAllBtn.playAllActive {
+  background: #6c3fc5;
+  color: white;
+}
+
+.playIcon  { font-size: 0.7rem; }
+.stopIcon  { font-size: 0.75rem; }
+
+/* ── Lines ───────────────────────────────────────────────────────────────── */
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.line {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  transition: opacity 0.2s;
+}
+
+/* When any line is active, dim the others */
+.lines:has(.lineActive) .line:not(.lineActive) {
+  opacity: 0.45;
+}
+
+/* Marek: avatar on right */
+.lineMarek { flex-direction: row-reverse; }
+/* Others: avatar on left */
+.lineOther { flex-direction: row; }
+
+/* Active line highlight */
+.lineActive {
+  opacity: 1 !important;
+}
+
+/* ── Avatar column ───────────────────────────────────────────────────────── */
+.avatarCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.speaker {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #aaa;
+  white-space: nowrap;
+}
+
+/* ── Bubble ──────────────────────────────────────────────────────────────── */
+.bubble {
+  position: relative;
+  max-width: 70%;
+  border-radius: 16px;
+  padding: 10px 40px 10px 14px; /* right padding for play button */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.lineMarek .bubble {
+  background: #6c3fc5;
+  border-bottom-right-radius: 4px;
+}
+
+.lineOther .bubble {
+  background: white;
+  border: 1.5px solid #d0c4ee;
+  border-bottom-left-radius: 4px;
+}
+
+/* Active bubble gets a glow */
+.lineActive .bubble {
+  box-shadow: 0 0 0 3px rgba(108, 63, 197, 0.35);
+  transform: translateY(-1px);
+}
+
+.lineActive.lineMarek .bubble {
+  box-shadow: 0 0 0 3px rgba(108, 63, 197, 0.5);
+}
+
+.lineActive.lineOther .bubble {
+  box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.45);
+}
+
+.es {
+  font-weight: 700;
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+.lineMarek .es { color: white; }
+.lineOther .es  { color: #c0392b; }
+
+.pl {
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.lineMarek .pl { color: rgba(255,255,255,0.72); }
+.lineOther .pl  { color: #888; }
+
+/* ── Per-line play button ────────────────────────────────────────────────── */
+.linePlayBtn {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.1s;
+  line-height: 1;
+}
+
+.lineMarek .linePlayBtn {
+  background: rgba(255,255,255,0.25);
+  color: white;
+}
+
+.lineMarek .linePlayBtn:hover,
+.lineMarek .linePlayBtn.linePlayActive {
+  background: rgba(255,255,255,0.45);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lineOther .linePlayBtn {
+  background: #f0eaff;
+  color: #6c3fc5;
+}
+
+.lineOther .linePlayBtn:hover,
+.lineOther .linePlayBtn.linePlayActive {
+  background: #6c3fc5;
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}

@@ -1,0 +1,170 @@
+.quiz {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+/* ── Progress bar ────────────────────────────────────────────────────────── */
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.progressBar {
+  flex: 1;
+  height: 6px;
+  background: #eee;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: #e74c3c;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+/* ── Question ────────────────────────────────────────────────────────────── */
+.question {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 20px;
+  line-height: 1.4;
+  color: #1a1a2e;
+}
+
+/* ── Options ─────────────────────────────────────────────────────────────── */
+.options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 2px solid #e5e5e5;
+  background: white;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: border-color 0.15s, background 0.15s;
+  color: #1a1a2e;
+}
+
+.option:not(:disabled):hover {
+  border-color: #e74c3c;
+  background: #fff5f5;
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.option.correct {
+  border-color: #27ae60;
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.option.wrong {
+  border-color: #e74c3c;
+  background: #fff5f5;
+  color: #991b1b;
+}
+
+.optionLetter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ── Feedback ────────────────────────────────────────────────────────────── */
+.feedback {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.feedbackCorrect {
+  font-weight: 600;
+  color: #27ae60;
+  font-size: 0.95rem;
+}
+
+.feedbackWrong {
+  font-size: 0.95rem;
+  color: #c0392b;
+}
+
+.nextBtn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.nextBtn:hover {
+  background: #c0392b;
+}
+
+/* ── Results ─────────────────────────────────────────────────────────────── */
+.results {
+  background: white;
+  border-radius: 16px;
+  padding: 40px 28px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.resultsEmoji {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.resultsTitle {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0 0 10px;
+  color: #1a1a2e;
+}
+
+.resultsScore {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 0 0 12px;
+}
+
+.resultsHint {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0;
+}

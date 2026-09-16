@@ -1,0 +1,39 @@
+.avatar {
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  background: #e9e9e9;
+  /* align to bottom of bubble so it looks natural in chat */
+  align-self: flex-end;
+}
+
+.spriteImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* width/height/transform set inline */
+}
+
+.singleImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.initials {
+  font-weight: 800;
+  color: white;
+  line-height: 1;
+  font-family: inherit;
+  user-select: none;
+}
+
+.empty {
+  flex-shrink: 0;
+}

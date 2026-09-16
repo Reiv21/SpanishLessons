@@ -1,0 +1,157 @@
+.wrapper {
+  background: white;
+  border-radius: 14px;
+  border: 2px solid #e8e8e8;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.2s;
+}
+
+.wrapper.correct { border-color: #27ae60; background: #f6fffa; }
+.wrapper.wrong   { border-color: #e74c3c; background: #fff6f5; }
+
+.instruction {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: #6c3fc5;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  flex-shrink: 0;
+}
+
+/* ── Sentence slot ───────────────────────────────────────────────────────── */
+.slot {
+  min-height: 52px;
+  border: 2px dashed #d0d0d0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  background: #fafafa;
+  transition: border-color 0.2s;
+}
+
+.wrapper.correct .slot { border-color: #27ae60; border-style: solid; }
+.wrapper.wrong   .slot { border-color: #e74c3c; border-style: solid; }
+
+.slotPlaceholder {
+  color: #bbb;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* ── Word chips ──────────────────────────────────────────────────────────── */
+.wordChip, .bankChip {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.1s, background 0.15s;
+}
+
+.wordChip {
+  background: #6c3fc5;
+  color: white;
+}
+.wordChip:not(:disabled):hover {
+  background: #5a31a8;
+  transform: translateY(-1px);
+}
+.wordChip:disabled { cursor: default; }
+
+.bankChip {
+  background: #f0eaff;
+  color: #6c3fc5;
+  border-color: #d6c7f5;
+}
+.bankChip:not(:disabled):hover {
+  background: #e0d0ff;
+  transform: translateY(-1px);
+}
+.bankChip:disabled { opacity: 0.4; cursor: default; }
+
+/* ── Word bank ───────────────────────────────────────────────────────────── */
+.bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 40px;
+}
+
+/* ── Feedback ────────────────────────────────────────────────────────────── */
+.feedback {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+}
+
+.feedbackCorrect { color: #27ae60; font-weight: 600; }
+.feedbackWrong   { color: #c0392b; }
+.translation     { color: #888; font-size: 0.85rem; }
+
+/* ── Actions ─────────────────────────────────────────────────────────────── */
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.checkBtn {
+  background: #6c3fc5;
+  color: white;
+  border: none;
+  padding: 9px 22px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.checkBtn:hover:not(:disabled) { background: #5a31a8; }
+.checkBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.resetBtn {
+  background: none;
+  border: 2px solid #6c3fc5;
+  color: #6c3fc5;
+  padding: 7px 18px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.resetBtn:hover { background: #6c3fc5; color: white; }
+
+.audioBtn {
+  background: none;
+  border: 2px solid #f39c12;
+  color: #f39c12;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.audioBtn:hover { background: #f39c12; color: white; }

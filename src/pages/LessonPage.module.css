@@ -1,0 +1,553 @@
+.page {
+  min-height: 100vh;
+  background: #fdf6ec;
+  font-family: "Inter", system-ui, sans-serif;
+  color: #1a1a2e;
+}
+
+/* ── Top bar ─────────────────────────────────────────────────────────────── */
+.topBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 24px;
+  background: white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #e74c3c;
+  font-weight: 600;
+  padding: 0;
+  white-space: nowrap;
+}
+.backBtn:hover { text-decoration: underline; }
+
+.topBarTitle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.lessonLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+.lessonSub {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* ── Phase indicator ─────────────────────────────────────────────────────── */
+.phaseIndicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.phaseStep { transition: color 0.2s; }
+.phaseActive { color: #e74c3c; font-weight: 700; }
+.phaseDivider { margin: 0 2px; }
+
+/* ── Cutscene ────────────────────────────────────────────────────────────── */
+.cutsceneWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 24px;
+  gap: 20px;
+}
+
+.cutsceneContainer {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+}
+
+.video {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16/9;
+  background: #000;
+}
+
+.skipBtn {
+  background: none;
+  border: 2px solid #e74c3c;
+  color: #e74c3c;
+  padding: 10px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.15s, color 0.15s;
+}
+.skipBtn:hover { background: #e74c3c; color: white; }
+
+/* ── Cutscene placeholder ────────────────────────────────────────────────── */
+.cutscenePlaceholder {
+  width: 100%;
+}
+
+.placeholderScene {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, #1a6fa3 0%, #2ecc71 100%);
+  overflow: hidden;
+}
+
+.placeholderBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholderOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 24px;
+  gap: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+}
+
+.placeholderChar {
+  height: 55%;
+  object-fit: contain;
+  filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.4));
+}
+
+.speechBubble {
+  background: white;
+  border-radius: 16px 16px 16px 4px;
+  padding: 14px 18px;
+  max-width: 260px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  margin-bottom: 16px;
+}
+
+.speechBubble p {
+  margin: 0 0 4px;
+  font-style: italic;
+  font-size: 1rem;
+  color: #1a1a2e;
+  font-weight: 600;
+}
+
+.speechSub {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.placeholderNote {
+  text-align: center;
+  padding: 10px;
+  font-size: 0.85rem;
+  color: #999;
+  margin: 0;
+}
+
+/* ── Learn ───────────────────────────────────────────────────────────────── */
+.learnWrapper {
+  max-width: 720px;
+  margin-inline: auto;
+  padding: 32px 24px 80px;
+}
+
+.learnContent {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0 0 16px;
+  color: #1a1a2e;
+}
+
+/* ── Story content ───────────────────────────────────────────────────────── */
+.storySection {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.textBlock {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #333;
+  margin: 0 0 16px;
+}
+.textBlock:last-child { margin-bottom: 0; }
+
+.tipBlock {
+  display: flex;
+  gap: 12px;
+  background: #fff8ec;
+  border-left: 4px solid #f39c12;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 16px;
+  margin: 16px 0;
+}
+
+.tipIcon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  line-height: 1.6;
+}
+
+.tipBlock p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #7a5000;
+}
+
+/* ── Vocabulary ──────────────────────────────────────────────────────────── */
+.vocabSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.vocabHint {
+  font-size: 0.85rem;
+  color: #888;
+  margin: -8px 0 16px;
+}
+
+.vocabGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.vocabCard {
+  position: relative;
+  background: white;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  padding: 16px 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  transition: border-color 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+
+.vocabCard:hover {
+  border-color: #e74c3c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(231,76,60,0.12);
+}
+
+.vocabCard.vocabHasCue {
+  border-color: #f39c12;
+}
+.vocabCard.vocabHasCue:hover {
+  border-color: #e67e22;
+}
+
+.cueIndicator {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  background: #f39c12;
+  color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vocabEs {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #c0392b;
+}
+
+.vocabPronunciation {
+  font-size: 0.75rem;
+  color: #aaa;
+  font-style: italic;
+}
+
+.vocabPl {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* ── Learn footer ────────────────────────────────────────────────────────── */
+.learnFooter {
+  display: flex;
+  justify-content: center;
+}
+
+.quizBtn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.quizBtn:hover {
+  background: #c0392b;
+  transform: translateY(-1px);
+}
+
+/* ── Quiz ────────────────────────────────────────────────────────────────── */
+.quizWrapper {
+  max-width: 640px;
+  margin-inline: auto;
+  padding: 32px 24px 80px;
+}
+
+.quizContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.quizDone {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quizNav {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.reviewBtn {
+  background: none;
+  border: 2px solid #e74c3c;
+  color: #e74c3c;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.reviewBtn:hover { background: #e74c3c; color: white; }
+
+.homeBtn {
+  background: #e74c3c;
+  border: 2px solid #e74c3c;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.homeBtn:hover { background: #c0392b; border-color: #c0392b; }
+
+/* ── Not found ───────────────────────────────────────────────────────────── */
+.notFound {
+  padding: 60px 24px;
+  text-align: center;
+}
+.notFound button {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: underline;
+}
+
+/* ── Quiz results card ───────────────────────────────────────────────────── */
+.resultsCard {
+  background: white;
+  border-radius: 16px;
+  padding: 40px 28px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.resultsEmoji {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.resultsTitle {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0 0 10px;
+}
+
+.resultsScore {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 0;
+}
+
+/* ── Dialogue block ──────────────────────────────────────────────────────── */
+.dialogueBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #f8f4ff;
+  border-radius: 16px;
+  padding: 20px 16px;
+  border: 1px solid #e0d4f7;
+}
+
+.dialogueLine {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+/* Marek's lines: avatar on the right, bubble floats right */
+.lineMarek {
+  flex-direction: row-reverse;
+}
+
+/* Others: avatar on the left, bubble floats left */
+.lineOther {
+  flex-direction: row;
+}
+
+.avatarCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.dialogueSpeaker {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #aaa;
+  white-space: nowrap;
+}
+
+.dialogueBubble {
+  max-width: 70%;
+  border-radius: 16px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lineMarek .dialogueBubble {
+  background: #6c3fc5;
+  border-bottom-right-radius: 4px;
+}
+
+.lineOther .dialogueBubble {
+  background: white;
+  border: 1.5px solid #d0c4ee;
+  border-bottom-left-radius: 4px;
+}
+
+.dialogueEs {
+  font-weight: 700;
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+.lineMarek .dialogueEs { color: white; }
+.lineOther .dialogueEs { color: #c0392b; }
+
+.dialoguePl {
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.lineMarek .dialoguePl { color: rgba(255,255,255,0.72); }
+.lineOther .dialoguePl { color: #888; }
+
+/* ── Grammar block ───────────────────────────────────────────────────────── */
+.grammarBlock {
+  background: #eef6ff;
+  border-radius: 12px;
+  padding: 18px 18px 14px;
+  border: 1px solid #c8dff7;
+}
+
+.grammarHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.grammarIcon { font-size: 1.1rem; }
+
+.grammarTitle {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #1a4a7a;
+}
+
+.grammarBody {
+  margin: 0 0 10px;
+  font-size: 0.92rem;
+  color: #2c4a6e;
+  line-height: 1.6;
+}
+
+.grammarExamples {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.grammarExamples li {
+  font-size: 0.9rem;
+  padding: 5px 10px;
+  background: white;
+  border-radius: 7px;
+  border-left: 3px solid #2980b9;
+  color: #333;
+}
+
+.grammarExamples strong {
+  color: #c0392b;
+}
