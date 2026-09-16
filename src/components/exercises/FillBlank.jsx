@@ -20,7 +20,7 @@ const SPECIAL_CHARS = ["á", "é", "í", "ó", "ú", "ü", "ñ", "¿", "¡"];
  *   audioSrc: "/assets/audio/...",
  * }
  */
-export default function FillBlank({ block }) {
+export default function FillBlank({ block, onComplete }) {
   const [value, setValue] = useState("");
   const [status, setStatus] = useState("idle"); // idle | correct | wrong
   const [hintVisible, setHintVisible] = useState(false);
@@ -30,6 +30,7 @@ export default function FillBlank({ block }) {
     const correct =
       value.trim().toLowerCase() === block.answer.trim().toLowerCase();
     setStatus(correct ? "correct" : "wrong");
+    if (correct) onComplete?.();
   }
 
   function reset() {

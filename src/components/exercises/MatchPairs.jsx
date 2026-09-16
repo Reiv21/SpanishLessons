@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import styles from "./MatchPairs.module.css";
 
 /**
@@ -16,7 +16,7 @@ import styles from "./MatchPairs.module.css";
  *   ],
  * }
  */
-export default function MatchPairs({ block }) {
+export default function MatchPairs({ block, onComplete }) {
   const pairs = block.pairs;
 
   // Each side is an array of { id, text }; id links the two sides.
@@ -35,6 +35,11 @@ export default function MatchPairs({ block }) {
   const [selPl, setSelPl]     = useState(null);         // selected PL id
 
   const done = matched.size === pairs.length;
+
+  useEffect(() => {
+    if (done) onComplete?.();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [done]);
 
   function selectEs(id) {
     if (matched.has(id) || wrong.has(id)) return;

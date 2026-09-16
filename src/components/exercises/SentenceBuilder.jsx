@@ -13,7 +13,7 @@ import styles from "./SentenceBuilder.module.css";
  *   audioSrc: "/assets/audio/sentence_01.mp3",     // optional
  * }
  */
-export default function SentenceBuilder({ block }) {
+export default function SentenceBuilder({ block, onComplete, completed }) {
   const shuffled = useMemo(() => shuffle([...block.words]), [block.words]);
 
   const [bank, setBank] = useState(shuffled);   // words not yet placed
@@ -37,6 +37,7 @@ export default function SentenceBuilder({ block }) {
     const correct = built.join(" ") === block.words.join(" ");
     setStatus(correct ? "correct" : "wrong");
     setShowTranslation(true);
+    if (correct) onComplete?.();
   }
 
   function reset() {

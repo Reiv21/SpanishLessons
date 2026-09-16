@@ -551,3 +551,114 @@
 .grammarExamples strong {
   color: #c0392b;
 }
+
+/* ── In-lesson progress bar ──────────────────────────────────────────────── */
+.phaseIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.phaseLabel {
+  font-size: 0.75rem;
+  color: #888;
+  white-space: nowrap;
+}
+
+.progressTrack {
+  width: 80px;
+  height: 6px;
+  background: #eee;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: #e74c3c;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.phasePct {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #e74c3c;
+  min-width: 28px;
+}
+
+.quizLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #e74c3c;
+  white-space: nowrap;
+}
+
+/* ── Block fade-in on unlock ─────────────────────────────────────────────── */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.blockFadeIn {
+  animation: fadeSlideIn 0.45s ease both;
+}
+
+/* ── Narrative reward banner ─────────────────────────────────────────────── */
+.rewardBanner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #6c3fc5, #e74c3c);
+  color: white;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-weight: 700;
+  font-size: 1rem;
+  animation: fadeSlideIn 0.3s ease both;
+  margin: 8px 0;
+}
+
+/* ── Cultural block ──────────────────────────────────────────────────────── */
+.culturalBlock {
+  background: #fff9f0;
+  border-radius: 12px;
+  padding: 18px 18px 14px;
+  border: 1px solid #f5d9a8;
+  border-left: 4px solid #e67e22;
+}
+
+.culturalHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.culturalIcon { font-size: 1.2rem; }
+
+.culturalTitle {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #7a4000;
+}
+
+.culturalBody {
+  margin: 0 0 10px;
+  font-size: 0.92rem;
+  color: #5a3000;
+  line-height: 1.6;
+}
+
+.culturalFact {
+  display: flex;
+  gap: 8px;
+  background: white;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.88rem;
+  color: #7a4000;
+  border-left: 3px solid #e67e22;
+  font-style: italic;
+}

@@ -2,7 +2,7 @@
 // Change these two values to rebrand the whole app.
 
 export const PLATFORM_NAME = "Testowa Hiszpania";
-export const HERO_NAME = "Marek";
+export const HERO_NAME = "Jan";
 export const MASCOT_NAME = "Hipek";
 
 // Tagline shown on the home page

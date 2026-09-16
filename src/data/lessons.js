@@ -1,8 +1,7 @@
 import { HERO_NAME } from "../config";
 
 // ─── Shared avatar definitions ────────────────────────────────────────────────
-// Reused across lessons so changes in one place propagate everywhere.
-const AVATAR_MAREK = (expression) => ({ type: "marek", expression });
+const AVATAR_JAN = (expression) => ({ type: "marek", expression }); // sprite sheet still named marek.png
 const AVATAR_AIRPORT_WORKER = {
   type: "image",
   src: "/fluatendant.png",
@@ -14,15 +13,17 @@ const AVATAR_TAXI = {
   alt: "Kierowca taksówki",
 };
 
-// ─── Lesson content ───────────────────────────────────────────────────────────
-// Block types available in content[]:
-//   { type: "text", text }
-//   { type: "tip", text }
-//   { type: "grammar", title, body, examples: [{es, pl}] }
-//   { type: "dialogue", lines: [{speaker, speakerLabel, avatar, es, pl}] }
-//   { type: "sentence-builder", instruction, words:[], translation, audioSrc? }
-//   { type: "fill-blank", instruction, questionPl, before, after, answer, hint?, translation, audioSrc? }
-//   { type: "match-pairs", instruction, pairs: [{es, pl}] }
+// ─── Block type reference ─────────────────────────────────────────────────────
+// { type: "text", text }
+// { type: "tip", text }
+// { type: "grammar", title, body, examples: [{es, pl}] }
+// { type: "cultural", title, body, fact? }
+// { type: "dialogue", lines: [{speaker, speakerLabel, avatar, es, pl, audioSrc?}] }
+// { type: "sentence-builder", instruction, words[], translation, audioSrc?, gate? }
+// { type: "fill-blank", instruction, questionPl, before, after, answer, hint?, translation, audioSrc?, gate? }
+// { type: "match-pairs", instruction, pairs: [{es, pl}], gate? }
+//
+// gate: true → completing this exercise unlocks the next section of content
 
 const lessons = [
   {
@@ -32,7 +33,7 @@ const lessons = [
     description: `${HERO_NAME} właśnie wylądował w Barcelonie. Tylko gdzie jego walizka?`,
     locked: false,
     cutscene: {
-      src: null,   // zastąp: "/assets/video/lesson1_cutscene.mp4"
+      src: null,    // podmień na: "/assets/video/lesson1_cutscene.mp4"
       poster: null,
     },
 
@@ -55,25 +56,27 @@ const lessons = [
     ],
 
     // ── Treść lekcji ──────────────────────────────────────────────────────
+    // Schemat: historia → gate (ćwiczenie) → kolejny fragment → gate → ...
     content: [
-      // — Wstęp —
+
+      // ═══ CZĘŚĆ 1: Pierwsze kroki ══════════════════════════════════════
       {
         type: "text",
-        text: `${HERO_NAME} wylądował na lotnisku El Prat o 14:30. W plecaku: laptop, słuchawki i nadzieja. W luku bagażowym: podobno jego walizka. Podobno — bo taśma bagażowa kręci się już dwadzieścia minut, a walizki nie ma.`,
+        text: `${HERO_NAME} Kowalski wylądował na lotnisku El Prat o 14:30. W plecaku: laptop, słuchawki i nadzieja na nowe życie w Barcelonie. Na taśmie bagażowej kręcą się walizki innych pasażerów — ale nie jego.`,
       },
       {
         type: "text",
-        text: `Obok stoi pani w uniformie. ${HERO_NAME} bierze głęboki oddech i podchodzi. Wie trzy słowa po hiszpańsku. Musi jakoś to rozegrać.`,
+        text: `Obok stoi pani w uniformie linii lotniczej. ${HERO_NAME} bierze głęboki oddech i podchodzi. Zna trzy słowa po hiszpańsku. Musi jakoś to rozegrać.`,
       },
 
-      // — Dialog 1: lotnisko —
+      // Dialog 1 — lotnisko
       {
         type: "dialogue",
         lines: [
           {
             speaker: "marek",
             speakerLabel: HERO_NAME,
-            avatar: AVATAR_MAREK("sad"),
+            avatar: AVATAR_JAN("sad"),
             es: "Perdona… ¿dónde está mi maleta?",
             pl: "Przepraszam… gdzie jest moja walizka?",
             audioSrc: "/assets/audio/d1_marek_01.mp3",
@@ -89,7 +92,7 @@ const lessons = [
           {
             speaker: "marek",
             speakerLabel: HERO_NAME,
-            avatar: AVATAR_MAREK("surprised"),
+            avatar: AVATAR_JAN("surprised"),
             es: "No entiendo… ¿habla inglés?",
             pl: "Nie rozumiem… czy mówi pani po angielsku?",
             audioSrc: "/assets/audio/d1_marek_02.mp3",
@@ -105,7 +108,7 @@ const lessons = [
           {
             speaker: "marek",
             speakerLabel: HERO_NAME,
-            avatar: AVATAR_MAREK("happy"),
+            avatar: AVATAR_JAN("happy"),
             es: "¡Gracias!",
             pl: "Dziękuję!",
             audioSrc: "/assets/audio/d1_marek_03.mp3",
@@ -114,59 +117,66 @@ const lessons = [
       },
       {
         type: "tip",
-        text: `"Perdona" to miękkie przepraszam — do zaczepiania obcych. "Lo siento" to przepraszam gdy coś zepsułeś. ${HERO_NAME} użył dobrego.`,
+        text: `"Perdona" to miękkie przepraszam — używasz żeby zagadać obcą osobę. "Lo siento" zostawiasz na sytuacje gdy coś zepsułeś lub kogoś uraziłeś.`,
       },
 
-      // — Ćwiczenie 1: dopasuj pary —
+      // ── GATE 1: dopasuj słówka z dialogu ── (odblokowuje notę kulturową + gramatykę)
       {
         type: "match-pairs",
-        instruction: "Zanim idziemy dalej — połącz słówka z tłumaczeniami:",
+        gate: true,
+        instruction: "Połącz słówka z rozmowy z ich tłumaczeniami:",
         pairs: [
-          { es: "Perdona",      pl: "Przepraszam" },
-          { es: "Gracias",      pl: "Dziękuję" },
-          { es: "No entiendo",  pl: "Nie rozumiem" },
-          { es: "Por favor",    pl: "Proszę" },
-          { es: "Sí",           pl: "Tak" },
-          { es: "Ayuda",        pl: "Pomoc" },
+          { es: "Perdona",     pl: "Przepraszam" },
+          { es: "Gracias",     pl: "Dziękuję" },
+          { es: "No entiendo", pl: "Nie rozumiem" },
+          { es: "Por favor",   pl: "Proszę" },
+          { es: "Sí",          pl: "Tak" },
         ],
       },
 
-      // — Gramatyka 1 —
+      // ═══ CZĘŚĆ 2: Kultura + gramatyka (odblokowane po gate 1) ══════════
+      {
+        type: "cultural",
+        title: "Jak mówi się po katalońsku?",
+        body: `Barcelona leży w Katalonii — regionie z własnym językiem. Na ulicach usłyszysz zarówno hiszpański (castellano), jak i kataloński (català). Pracownicy lotniska mówią po hiszpańsku, ale szyldy często są dwujęzyczne.`,
+        fact: `"Gràcies" (gra-si-es) to dziękuję po katalońsku. Bardzo podobne do hiszpańskiego "gracias" — nie pomylisz się.`,
+      },
       {
         type: "grammar",
         title: "¿Dónde está…? — Gdzie jest…?",
-        body: `To twoje pierwsze gotowe pytanie. "¿Dónde?" znaczy "gdzie?", "está" to forma czasownika "być" (dla jednej rzeczy lub osoby). Wstaw po "está" co chcesz znaleźć — i pytanie gotowe. Prosto jak budowa cepa.`,
+        body: `"¿Dónde?" znaczy "gdzie?", a "está" to forma czasownika "być" opisująca miejsce lub stan tymczasowy. Wystarczy wstawić po "está" nazwę rzeczy, której szukasz.`,
         examples: [
-          { es: "¿Dónde está mi maleta?",    pl: "Gdzie jest moja walizka?" },
-          { es: "¿Dónde está la salida?",    pl: "Gdzie jest wyjście?" },
-          { es: "¿Dónde está el aeropuerto?",pl: "Gdzie jest lotnisko?" },
-          { es: "¿Dónde está el baño?",      pl: "Gdzie jest toaleta?" },
+          { es: "¿Dónde está mi maleta?",     pl: "Gdzie jest moja walizka?" },
+          { es: "¿Dónde está la salida?",     pl: "Gdzie jest wyjście?" },
+          { es: "¿Dónde está el baño?",       pl: "Gdzie jest toaleta?" },
+          { es: "¿Dónde está el aeropuerto?", pl: "Gdzie jest lotnisko?" },
         ],
       },
 
-      // — Ćwiczenie 2: uzupełnij lukę —
+      // ── GATE 2: fill-blank z gramatyki ── (odblokowuje część 2 historii)
       {
         type: "fill-blank",
-        instruction: "Uzupełnij pytanie Marka:",
+        gate: true,
+        instruction: "Uzupełnij pytanie Jana:",
         questionPl: "Gdzie jest moja walizka?",
         before: "¿Dónde",
         after: "mi maleta?",
         answer: "está",
-        hint: "Forma czasownika 'estar' dla trzeciej osoby liczby pojedynczej.",
+        hint: "Forma czasownika 'estar' — używamy dla miejsca.",
         translation: "¿Dónde está mi maleta?",
       },
 
-      // — Dalej w historii —
+      // ═══ CZĘŚĆ 3: Historia ciągnie się dalej (odblokowane po gate 2) ══
       {
         type: "text",
-        text: `Pracownica znalazła walizkę. Była na taśmie numer 4 zamiast 7. ${HERO_NAME} dziękuje, bierze walizkę i rusza do wyjścia. Teraz trzeba znaleźć taksówkę.`,
+        text: `Pracownica znalazła walizkę — była na taśmie nr 4 zamiast 7. ${HERO_NAME} dziękuje, bierze torbę i rusza do wyjścia. Na zewnątrz czeka taksówka z kartką "JAN KOWALSKI".`,
       },
       {
         type: "text",
-        text: `Przy wyjściu stoi kierowca z kartką "MAREK". ${HERO_NAME} macha ręką. Kierowca kiwa głową, bierze walizkę i mówi coś po hiszpańsku. ${HERO_NAME} nie rozumie połowy, ale rozumie że chodzi o Barcelona centre.`,
+        text: `Kierowca jest rozmowny. Kiwa głową, bierze walizkę i zaczyna mówić szybko po hiszpańsku. ${HERO_NAME} rozumie połowę — ale tej ważniejszej połowy.`,
       },
 
-      // — Dialog 2: taksówka —
+      // Dialog 2 — taksówka
       {
         type: "dialogue",
         lines: [
@@ -181,7 +191,7 @@ const lessons = [
           {
             speaker: "marek",
             speakerLabel: HERO_NAME,
-            avatar: AVATAR_MAREK("smirk"),
+            avatar: AVATAR_JAN("smirk"),
             es: "Sí, gracias. ¿Vamos al centro?",
             pl: "Tak, dziękuję. Jedziemy do centrum?",
             audioSrc: "/assets/audio/d2_marek_01.mp3",
@@ -197,7 +207,7 @@ const lessons = [
           {
             speaker: "marek",
             speakerLabel: HERO_NAME,
-            avatar: AVATAR_MAREK("laughing"),
+            avatar: AVATAR_JAN("laughing"),
             es: "Muchas gracias.",
             pl: "Bardzo dziękuję.",
             audioSrc: "/assets/audio/d2_marek_02.mp3",
@@ -206,63 +216,42 @@ const lessons = [
       },
       {
         type: "tip",
-        text: `"Muchas gracias" to wzmocnione dziękuję — dosłownie "wiele dziękuję". Używasz gdy chcesz podkreślić wdzięczność. "Gracias" wystarczy w 90% sytuacji.`,
+        text: `"¿Todo bien?" to popularne powitanie — dosłownie "wszystko dobrze?". Odpowiadasz "Sí, bien" albo po prostu "Bien, gracias". Nie musisz rozwijać tematu.`,
       },
 
-      // — Gramatyka 2 —
+      // ── GATE 3: ułóż zdanie z dialogu 2 ── (odblokowuje gramatykę 2 + kulturę 2)
+      {
+        type: "sentence-builder",
+        gate: true,
+        instruction: "Ułóż zdanie, które powiedział Jan do kierowcy:",
+        words: ["Sí,", "gracias.", "¿Vamos", "al", "centro?"],
+        translation: "Tak, dziękuję. Jedziemy do centrum?",
+        audioSrc: "/assets/audio/d2_marek_01.mp3",
+      },
+
+      // ═══ CZĘŚĆ 4: Gramatyka 2 + kultura 2 (odblokowane po gate 3) ══════
       {
         type: "grammar",
         title: "Mi, tu, su — mój, twój, jego/jej",
-        body: `W hiszpańskim zaimki dzierżawcze stoją przed rzeczownikiem i są proste — nie odmieniają się przez rodzaj rzeczownika (w przeciwieństwie do polskiego).`,
+        body: `Zaimki dzierżawcze w hiszpańskim stoją przed rzeczownikiem i nie odmieniają się przez rodzaj — w przeciwieństwie do polskiego. "Mi" zawsze znaczy "mój/moja/moje".`,
         examples: [
           { es: "Mi maleta",  pl: "Moja walizka" },
           { es: "Tu maleta",  pl: "Twoja walizka" },
           { es: "Su maleta",  pl: "Jego/jej walizka" },
-          { es: "Mi nombre",  pl: "Moje imię" },
+          { es: "Mi nombre es Jan", pl: "Mam na imię Jan" },
         ],
       },
-
-      // — Ćwiczenie 3: ułóż zdanie —
       {
-        type: "sentence-builder",
-        instruction: "Ułóż zdanie po hiszpańsku:",
-        words: ["¿Dónde", "está", "la", "salida?"],
-        translation: "Gdzie jest wyjście?",
+        type: "cultural",
+        title: "Barcelońskie taksówki",
+        body: `Taksówki w Barcelonie są żółto-czarne i mają wyraźne taryfy na szybach. Kierowcy zazwyczaj mówią po katalońsku i hiszpańsku, rzadziej po angielsku. "Al centre" albo podanie adresu wystarczą, żeby dotrzeć na miejsce.`,
+        fact: `Barcelona ma też rozbudowaną sieć metra — Metro de Barcelona. Linia L1 (czerwona) i L3 (zielona) pokrywają większość centrum. Bilet jednorazowy kosztuje ok. 2,40 EUR.`,
       },
 
-      // — Ćwiczenie 4: ułóż zdanie —
-      {
-        type: "sentence-builder",
-        instruction: "Teraz to zdanie:",
-        words: ["Muchas", "gracias,", "por", "favor."],
-        translation: "Bardzo dziękuję, proszę.",
-      },
-
-      // — Ćwiczenie 5: uzupełnij lukę —
-      {
-        type: "fill-blank",
-        instruction: "Marek chce podziękować z emfazą. Uzupełnij:",
-        questionPl: "Bardzo dziękuję.",
-        before: "Muchas",
-        after: ".",
-        answer: "gracias",
-        hint: "Wzmocniona forma dziękuję — dosłownie 'wiele dziękuję'.",
-        translation: "Muchas gracias.",
-      },
-
-      // — Podsumowanie —
-      {
-        type: "text",
-        text: `To był intensywny dzień. ${HERO_NAME} zgubił i odnalazł walizkę, dogadał się z pracownicą i kierowcą — wyłącznie po hiszpańsku. Nie wszystko rozumiał, ale kluczowe słowa zadziałały.`,
-      },
-      {
-        type: "tip",
-        text: `Zapamiętaj te trzy ratunkowe zwroty na każdą sytuację: "No entiendo" (nie rozumiem), "Por favor" (proszę), "¿Habla inglés?" (czy mówi po angielsku?). Z nimi przeżyjesz pierwsze tygodnie.`,
-      },
-
-      // — Ćwiczenie 6: finalne utrwalenie —
+      // ── GATE 4: finalne utrwalenie ── (odblokowuje zakończenie)
       {
         type: "match-pairs",
+        gate: true,
         instruction: "Finalne utrwalenie — połącz wszystkie pary:",
         pairs: [
           { es: "¿Dónde está…?",  pl: "Gdzie jest…?" },
@@ -274,6 +263,16 @@ const lessons = [
           { es: "¿Habla inglés?",  pl: "Czy mówi po angielsku?" },
           { es: "El aeropuerto",   pl: "Lotnisko" },
         ],
+      },
+
+      // ═══ ZAKOŃCZENIE (odblokowane po gate 4) ════════════════════════════
+      {
+        type: "text",
+        text: `Taksówka wjeżdża w Barcelonę od strony autostrady. ${HERO_NAME} patrzy przez okno na miasto — budynki z terakoty, palmy na pasie zieleni, kawiarnie z krzesłami wystawionymi na chodnik. Pierwsze zdanie po hiszpańsku już za nim.`,
+      },
+      {
+        type: "tip",
+        text: `Trzy zwroty ratujące życie: "No entiendo" (nie rozumiem), "Por favor" (proszę), "¿Habla inglés?" (czy mówi po angielsku?). Z tym zestawem przeżyjesz pierwsze dni w każdym hiszpańskojęzycznym kraju.`,
       },
     ],
 
@@ -304,7 +303,7 @@ const lessons = [
     // ── Quiz końcowy ──────────────────────────────────────────────────────
     quiz: [
       {
-        question: "Jak po hiszpańsku powiedzieć 'Przepraszam' (zaczepiając obcego)?",
+        question: "Jak po hiszpańsku powiedzieć 'Przepraszam' zaczepiając obcą osobę?",
         options: [
           { text: "Lo siento", correct: false },
           { text: "Perdona",   correct: true },
@@ -315,10 +314,10 @@ const lessons = [
       {
         question: "Co znaczy '¿Dónde está la salida?'",
         options: [
-          { text: "Gdzie jest moja walizka?",    correct: false },
-          { text: "Czy jest wyjście awaryjne?",  correct: false },
-          { text: "Gdzie jest wyjście?",         correct: true },
-          { text: "Gdzie jest lotnisko?",        correct: false },
+          { text: "Gdzie jest moja walizka?",  correct: false },
+          { text: "Czy jest wyjście awaryjne?", correct: false },
+          { text: "Gdzie jest wyjście?",        correct: true },
+          { text: "Gdzie jest lotnisko?",       correct: false },
         ],
       },
       {
@@ -349,12 +348,12 @@ const lessons = [
         ],
       },
       {
-        question: "Jak zapytać 'Czy mówi pan/pani po angielsku?'",
+        question: "W jakim języku napisane są szyldy na barcelońskim lotnisku?",
         options: [
-          { text: "¿Habla español?",      correct: false },
-          { text: "¿Habla inglés?",       correct: true },
-          { text: "¿Dónde está inglés?",  correct: false },
-          { text: "¿No entiendo inglés?", correct: false },
+          { text: "Tylko po angielsku",                correct: false },
+          { text: "Tylko po hiszpańsku",               correct: false },
+          { text: "Po hiszpańsku i katalońsku",        correct: true },
+          { text: "Po katalońsku, angielsku i francusku", correct: false },
         ],
       },
       {
@@ -373,8 +372,8 @@ const lessons = [
   {
     id: 2,
     title: "Lekcja 2",
-    subtitle: "Taksówka do centrum",
-    description: `${HERO_NAME} jest w taksówce. Kierowca nie mówi po angielsku. Klasyka.`,
+    subtitle: "Pierwsze mieszkanie",
+    description: `${HERO_NAME} poznaje współlokatorów. Jak się przedstawić po hiszpańsku?`,
     locked: true,
     cutscene: { src: null, poster: null },
     vocabulary: [],

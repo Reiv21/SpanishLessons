@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import lessons from "../data/lessons";
 import { HERO_NAME } from "../config";
@@ -11,8 +11,10 @@ import MatchPairs from "../components/exercises/MatchPairs";
 import DialogueBlock from "../components/DialogueBlock";
 import styles from "./LessonPage.module.css";
 
-// Lesson has three phases: cutscene → learn → quiz
 const PHASE = { CUTSCENE: "cutscene", LEARN: "learn", QUIZ: "quiz" };
+
+// Exercise block types that can act as gates
+const EXERCISE_TYPES = new Set(["sentence-builder", "fill-blank", "match-pairs"]);
 
 export default function LessonPage() {
   const { id } = useParams();
@@ -25,6 +27,29 @@ export default function LessonPage() {
   const [hipekCueIndex, setHipekCueIndex] = useState(null);
   const [quizDone, setQuizDone] = useState(false);
   const [quizScore, setQuizScore] = useState(null);
+
+  // Step-by-step unlocking: index of last visible block (-1 = none yet, then grows)
+  // Blocks without gate:true are always shown up to the first locked gate.
+  // unlockedUpTo === content.length means everything is visible.
+  const [unlockedUpTo, setUnlockedUpTo] = useState(() => {
+    if (!lesson) return 0;
+    // Auto-unlock everything up to (but not including) the first gate
+    const firstGate = lesson.content.findIndex((b) => b.gate);
+    return firstGate === -1 ? lesson.content.length : firstGate;
+  });
+
+  // "Narrative reward" flash shown briefly after completing a gate exercise
+  const [showReward, setShowReward] = useState(false);
+  const rewardTimerRef = useRef(null);
+
+  // Scroll to newly unlocked block
+  const newBlockRef = useRef(null);
+  useEffect(() => {
+    if (newBlockRef.current) {
+      newBlockRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [unlockedUpTo]);
+
   const videoRef = useRef(null);
 
   if (!lesson) {
@@ -36,15 +61,26 @@ export default function LessonPage() {
     );
   }
 
-  // Track which vocab word was last clicked to trigger Hipek cues
-  function handleVocabClick(wordIndex) {
-    const cue = lesson.hipekCues.find(
-      (c) => c.triggerAfterVocabIndex === wordIndex
+  // Called when a gated exercise is completed successfully
+  function handleGateComplete(blockIndex) {
+    // Find next unlock boundary: everything up to next gate (exclusive)
+    const nextGate = lesson.content.findIndex(
+      (b, i) => i > blockIndex && b.gate
     );
-    if (cue) {
-      const cueIndex = lesson.hipekCues.indexOf(cue);
-      setHipekCueIndex(cueIndex);
-    }
+    const nextUnlock = nextGate === -1 ? lesson.content.length : nextGate;
+
+    // Brief reward flash before revealing next content
+    setShowReward(true);
+    clearTimeout(rewardTimerRef.current);
+    rewardTimerRef.current = setTimeout(() => {
+      setShowReward(false);
+      setUnlockedUpTo(nextUnlock);
+    }, 1400);
+  }
+
+  function handleVocabClick(wordIndex) {
+    const cue = lesson.hipekCues.find((c) => c.triggerAfterVocabIndex === wordIndex);
+    if (cue) setHipekCueIndex(lesson.hipekCues.indexOf(cue));
   }
 
   function handleQuizComplete(score, total) {
@@ -52,6 +88,16 @@ export default function LessonPage() {
     setQuizDone(true);
     markLessonComplete(lesson.id);
   }
+
+  const totalSteps = lesson.content.filter((b) => b.gate).length + 1; // +1 for quiz
+  const completedGates = lesson.content
+    .slice(0, unlockedUpTo)
+    .filter((b) => b.gate).length;
+  const progressPct = Math.round(
+    ((completedGates + (phase === PHASE.QUIZ ? 0.5 : 0)) / totalSteps) * 100
+  );
+
+  const allContentUnlocked = unlockedUpTo >= lesson.content.length;
 
   return (
     <div className={styles.page}>
@@ -64,10 +110,15 @@ export default function LessonPage() {
           <span className={styles.lessonLabel}>{lesson.title}</span>
           <span className={styles.lessonSub}>{lesson.subtitle}</span>
         </div>
-        <PhaseIndicator phase={phase} />
+        {phase === PHASE.LEARN && (
+          <PhaseIndicator pct={progressPct} gates={completedGates} total={totalSteps - 1} />
+        )}
+        {phase === PHASE.QUIZ && (
+          <span className={styles.quizLabel}>Quiz</span>
+        )}
       </div>
 
-      {/* ── Cutscene phase ───────────────────────────────────────────────── */}
+      {/* ── Cutscene ─────────────────────────────────────────────────────── */}
       {phase === PHASE.CUTSCENE && (
         <div className={styles.cutsceneWrapper}>
           <div className={styles.cutsceneContainer}>
@@ -84,29 +135,47 @@ export default function LessonPage() {
               <CutscenePlaceholder lesson={lesson} />
             )}
           </div>
-          <button
-            className={styles.skipBtn}
-            onClick={() => setPhase(PHASE.LEARN)}
-          >
+          <button className={styles.skipBtn} onClick={() => setPhase(PHASE.LEARN)}>
             Pomiń scenę i zacznij lekcję →
           </button>
         </div>
       )}
 
-      {/* ── Learn phase ──────────────────────────────────────────────────── */}
+      {/* ── Learn ────────────────────────────────────────────────────────── */}
       {phase === PHASE.LEARN && (
         <div className={styles.learnWrapper}>
           <div className={styles.learnContent}>
-            {/* Story content blocks */}
             <section className={styles.storySection}>
-              <h2 className={styles.sectionTitle}>Historia</h2>
-              {lesson.content.map((block, i) => (
-                <ContentBlock key={i} block={block} />
-              ))}
+              {lesson.content.map((block, i) => {
+                if (i > unlockedUpTo) return null; // still locked
+                const isNewlyUnlocked = i === unlockedUpTo && i > 0;
+                return (
+                  <div
+                    key={i}
+                    ref={isNewlyUnlocked ? newBlockRef : null}
+                    className={isNewlyUnlocked ? styles.blockFadeIn : undefined}
+                  >
+                    <ContentBlock
+                      block={block}
+                      isGate={!!block.gate}
+                      locked={i === unlockedUpTo && EXERCISE_TYPES.has(block.type) && false}
+                      onGateComplete={() => handleGateComplete(i)}
+                    />
+                  </div>
+                );
+              })}
+
+              {/* Narrative reward flash */}
+              {showReward && (
+                <div className={styles.rewardBanner} role="status">
+                  <span>🎉</span>
+                  <span>Świetnie! Historia toczy się dalej…</span>
+                </div>
+              )}
             </section>
 
-            {/* Vocabulary */}
-            {lesson.vocabulary.length > 0 && (
+            {/* Vocabulary — shown only after all content unlocked */}
+            {allContentUnlocked && lesson.vocabulary.length > 0 && (
               <section className={styles.vocabSection}>
                 <h2 className={styles.sectionTitle}>Słówka z tej lekcji</h2>
                 <p className={styles.vocabHint}>
@@ -128,28 +197,25 @@ export default function LessonPage() {
               </section>
             )}
 
-            <div className={styles.learnFooter}>
-              <button
-                className={styles.quizBtn}
-                onClick={() => setPhase(PHASE.QUIZ)}
-              >
-                Sprawdź wiedzę →
-              </button>
-            </div>
+            {/* Go to quiz — only when all content unlocked */}
+            {allContentUnlocked && (
+              <div className={styles.learnFooter}>
+                <button className={styles.quizBtn} onClick={() => setPhase(PHASE.QUIZ)}>
+                  Sprawdź wiedzę →
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
 
-      {/* ── Quiz phase ───────────────────────────────────────────────────── */}
+      {/* ── Quiz ─────────────────────────────────────────────────────────── */}
       {phase === PHASE.QUIZ && (
         <div className={styles.quizWrapper}>
           <div className={styles.quizContent}>
             <h2 className={styles.sectionTitle}>Sprawdzenie</h2>
             {!quizDone ? (
-              <Quiz
-                questions={lesson.quiz}
-                onComplete={handleQuizComplete}
-              />
+              <Quiz questions={lesson.quiz} onComplete={handleQuizComplete} />
             ) : (
               <QuizResults
                 score={quizScore.score}
@@ -163,7 +229,6 @@ export default function LessonPage() {
         </div>
       )}
 
-      {/* ── Hipek (floating, always visible during learn/quiz) ───────────── */}
       {phase !== PHASE.CUTSCENE && (
         <Hipek cues={lesson.hipekCues} activeCueIndex={hipekCueIndex} />
       )}
@@ -173,23 +238,14 @@ export default function LessonPage() {
 
 /* ── Sub-components ──────────────────────────────────────────────────────── */
 
-function PhaseIndicator({ phase }) {
-  const steps = [
-    { key: PHASE.CUTSCENE, label: "Scenka" },
-    { key: PHASE.LEARN, label: "Lekcja" },
-    { key: PHASE.QUIZ, label: "Quiz" },
-  ];
+function PhaseIndicator({ pct, gates, total }) {
   return (
     <div className={styles.phaseIndicator}>
-      {steps.map((s, i) => (
-        <span
-          key={s.key}
-          className={`${styles.phaseStep} ${phase === s.key ? styles.phaseActive : ""}`}
-        >
-          {i > 0 && <span className={styles.phaseDivider}>›</span>}
-          {s.label}
-        </span>
-      ))}
+      <span className={styles.phaseLabel}>{gates}/{total} zadań</span>
+      <div className={styles.progressTrack}>
+        <div className={styles.progressFill} style={{ width: `${pct}%` }} />
+      </div>
+      <span className={styles.phasePct}>{pct}%</span>
     </div>
   );
 }
@@ -205,12 +261,6 @@ function CutscenePlaceholder({ lesson }) {
           onError={(e) => { e.target.style.display = "none"; }}
         />
         <div className={styles.placeholderOverlay}>
-          <img
-            src="/assets/characters/marek_confused.png"
-            alt={HERO_NAME}
-            className={styles.placeholderChar}
-            onError={(e) => { e.target.style.display = "none"; }}
-          />
           <div className={styles.speechBubble}>
             <p>„¿Dónde está mi maleta?!"</p>
             <span className={styles.speechSub}>Gdzie jest moja walizka?!</span>
@@ -224,16 +274,54 @@ function CutscenePlaceholder({ lesson }) {
   );
 }
 
-function ContentBlock({ block }) {
-  if (block.type === "sentence-builder") return <SentenceBuilder block={block} />;
-  if (block.type === "fill-blank")       return <FillBlank block={block} />;
-  if (block.type === "match-pairs")      return <MatchPairs block={block} />;
+/**
+ * ContentBlock wraps each block and passes onComplete to exercises that are gates.
+ * Non-gate exercises still work normally — completing them just doesn't unlock anything.
+ */
+function ContentBlock({ block, isGate, onGateComplete }) {
+  const [gateCompleted, setGateCompleted] = useState(false);
+
+  function handleExerciseComplete() {
+    if (isGate && !gateCompleted) {
+      setGateCompleted(true);
+      onGateComplete();
+    }
+  }
+
+  const exerciseProps = isGate
+    ? { onComplete: handleExerciseComplete, completed: gateCompleted }
+    : {};
+
+  if (block.type === "sentence-builder")
+    return <SentenceBuilder block={block} {...exerciseProps} />;
+  if (block.type === "fill-blank")
+    return <FillBlank block={block} {...exerciseProps} />;
+  if (block.type === "match-pairs")
+    return <MatchPairs block={block} {...exerciseProps} />;
 
   if (block.type === "tip") {
     return (
       <div className={styles.tipBlock}>
         <span className={styles.tipIcon}>💡</span>
         <p>{block.text}</p>
+      </div>
+    );
+  }
+
+  if (block.type === "cultural") {
+    return (
+      <div className={styles.culturalBlock}>
+        <div className={styles.culturalHeader}>
+          <span className={styles.culturalIcon}>🌍</span>
+          <span className={styles.culturalTitle}>{block.title}</span>
+        </div>
+        <p className={styles.culturalBody}>{block.body}</p>
+        {block.fact && (
+          <div className={styles.culturalFact}>
+            <span>💬</span>
+            <span>{block.fact}</span>
+          </div>
+        )}
       </div>
     );
   }
@@ -264,16 +352,12 @@ function ContentBlock({ block }) {
     );
   }
 
-  // default: type === "text" — support **bold**
+  // text — supports **bold**
   const parts = block.text.split(/(\*\*[^*]+\*\*)/g);
   return (
     <p className={styles.textBlock}>
       {parts.map((part, i) =>
-        part.startsWith("**") ? (
-          <strong key={i}>{part.slice(2, -2)}</strong>
-        ) : (
-          part
-        )
+        part.startsWith("**") ? <strong key={i}>{part.slice(2, -2)}</strong> : part
       )}
     </p>
   );
@@ -288,12 +372,9 @@ function QuizResults({ score, total, onReview, onHome, styles }) {
           {pct === 100 ? "🏆" : pct >= 60 ? "🎉" : "📚"}
         </div>
         <h3 className={styles.resultsTitle}>
-          {pct === 100
-            ? "Idealnie!"
-            : pct >= 80
-            ? "Świetnie!"
-            : pct >= 60
-            ? "Nieźle!"
+          {pct === 100 ? "Idealnie!"
+            : pct >= 80 ? "Świetnie!"
+            : pct >= 60 ? "Nieźle!"
             : `${HERO_NAME} by się popłakał, ale nie poddawaj się!`}
         </h3>
         <p className={styles.resultsScore}>
@@ -301,12 +382,8 @@ function QuizResults({ score, total, onReview, onHome, styles }) {
         </p>
       </div>
       <div className={styles.quizNav}>
-        <button className={styles.reviewBtn} onClick={onReview}>
-          ← Wróć do lekcji
-        </button>
-        <button className={styles.homeBtn} onClick={onHome}>
-          Strona główna
-        </button>
+        <button className={styles.reviewBtn} onClick={onReview}>← Wróć do lekcji</button>
+        <button className={styles.homeBtn} onClick={onHome}>Strona główna</button>
       </div>
     </div>
   );
