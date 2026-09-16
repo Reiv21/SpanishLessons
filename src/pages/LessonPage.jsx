@@ -8,13 +8,15 @@ import Quiz from "../components/Quiz";
 import SentenceBuilder from "../components/exercises/SentenceBuilder";
 import FillBlank from "../components/exercises/FillBlank";
 import MatchPairs from "../components/exercises/MatchPairs";
+import MultiChoice from "../components/exercises/MultiChoice";
 import DialogueBlock from "../components/DialogueBlock";
+import LecturerCTA from "../components/LecturerCTA";
 import styles from "./LessonPage.module.css";
 
 const PHASE = { CUTSCENE: "cutscene", LEARN: "learn", QUIZ: "quiz" };
 
 // Exercise block types that can act as gates
-const EXERCISE_TYPES = new Set(["sentence-builder", "fill-blank", "match-pairs"]);
+const EXERCISE_TYPES = new Set(["sentence-builder", "fill-blank", "match-pairs", "multi-choice"]);
 
 export default function LessonPage() {
   const { id } = useParams();
@@ -298,6 +300,12 @@ function ContentBlock({ block, isGate, onGateComplete }) {
     return <FillBlank block={block} {...exerciseProps} />;
   if (block.type === "match-pairs")
     return <MatchPairs block={block} {...exerciseProps} />;
+  if (block.type === "multi-choice")
+    return <MultiChoice block={block} {...exerciseProps} />;
+
+  if (block.type === "lecturer-cta") {
+    return <LecturerCTA block={block} />;
+  }
 
   if (block.type === "tip") {
     return (
