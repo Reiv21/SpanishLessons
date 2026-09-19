@@ -35,9 +35,27 @@ export default function Hipek({ cues = [], activeCueIndex = null }) {
     }
   }
 
+  function stopCue() {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    setPlaying(false);
+  }
+
   function handleCueClick(index) {
+    // klik w kwestię która właśnie gra = zatrzymaj
+    if (playing && currentCue === index) {
+      stopCue();
+      return;
+    }
     setCurrentCue(index);
     playCue(cues[index].audioSrc);
+  }
+
+  function handleClose() {
+    stopCue();
+    setOpen(false);
   }
 
   function handleAudioEnd() {
@@ -54,7 +72,7 @@ export default function Hipek({ cues = [], activeCueIndex = null }) {
             <span className={styles.panelTitle}>{MASCOT_NAME} mówi</span>
             <button
               className={styles.closeBtn}
-              onClick={() => setOpen(false)}
+              onClick={handleClose}
               aria-label="Zamknij panel Hipka"
             >
               ×
@@ -64,22 +82,36 @@ export default function Hipek({ cues = [], activeCueIndex = null }) {
           {activeCue && (
             <div className={styles.activeCue}>
               <span className={playing ? styles.speakingDot : styles.idleDot} />
-              <span>{activeCue.label}</span>
+              <span className={styles.activeCueLabel}>{activeCue.label}</span>
+              {playing && (
+                <button
+                  className={styles.stopBtn}
+                  onClick={stopCue}
+                  aria-label="Zatrzymaj Hipka"
+                  title="Zatrzymaj"
+                >
+                  ■
+                </button>
+              )}
             </div>
           )}
 
           <ul className={styles.cueList}>
-            {cues.map((cue, i) => (
-              <li key={i}>
-                <button
-                  className={`${styles.cueBtn} ${currentCue === i && playing ? styles.active : ""}`}
-                  onClick={() => handleCueClick(i)}
-                >
-                  <span className={styles.playIcon}>▶</span>
-                  {cue.label}
-                </button>
-              </li>
-            ))}
+            {cues.map((cue, i) => {
+              const isPlaying = currentCue === i && playing;
+              return (
+                <li key={i}>
+                  <button
+                    className={`${styles.cueBtn} ${isPlaying ? styles.active : ""}`}
+                    onClick={() => handleCueClick(i)}
+                    aria-label={isPlaying ? `Zatrzymaj: ${cue.label}` : `Odtwórz: ${cue.label}`}
+                  >
+                    <span className={styles.playIcon}>{isPlaying ? "■" : "▶"}</span>
+                    {cue.label}
+                  </button>
+                </li>
+              );
+            })}
           </ul>
 
           {cues.length === 0 && (

@@ -639,17 +639,17 @@ const lessons = [
     hipekCues: [
       {
         label: "Wymowa 'me llamo'",
-        audioSrc: "/assets/audio/hipek_01.mp3",
+        audioSrc: "/assets/audio/l2_hipek_01.mp3",
         triggerAfterVocabIndex: 0,
       },
       {
         label: "Soy vs estoy, różnica",
-        audioSrc: "/assets/audio/hipek_03.mp3",
+        audioSrc: "/assets/audio/l2_hipek_02.mp3",
         triggerAfterVocabIndex: 3,
       },
       {
         label: "¿Cómo se dice?, jak używać",
-        audioSrc: "/assets/audio/hipek_04.mp3",
+        audioSrc: "/assets/audio/l2_hipek_03.mp3",
         triggerAfterVocabIndex: 8,
       },
     ],
