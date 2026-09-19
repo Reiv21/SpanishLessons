@@ -304,6 +304,32 @@
   color: #555;
 }
 
+/* ── Exercise wrapper + skip ─────────────────────────────────────────────── */
+.exerciseWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+/* ćwiczenie na całą szerokość, przycisk pomijania dosunięty do prawej */
+.exerciseWrap > :first-child {
+  width: 100%;
+}
+.skipExerciseBtn {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  color: #b0a89c;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 4px;
+  transition: color 0.15s;
+}
+.skipExerciseBtn:hover {
+  color: #e74c3c;
+  text-decoration: underline;
+}
+
 /* ── Learn footer ────────────────────────────────────────────────────────── */
 .learnFooter {
   display: flex;

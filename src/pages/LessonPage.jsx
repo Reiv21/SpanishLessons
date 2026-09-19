@@ -295,14 +295,31 @@ function ContentBlock({ block, isGate, onGateComplete }) {
     ? { onComplete: handleExerciseComplete, completed: gateCompleted }
     : {};
 
-  if (block.type === "sentence-builder")
-    return <SentenceBuilder block={block} {...exerciseProps} />;
-  if (block.type === "fill-blank")
-    return <FillBlank block={block} {...exerciseProps} />;
-  if (block.type === "match-pairs")
-    return <MatchPairs block={block} {...exerciseProps} />;
-  if (block.type === "multi-choice")
-    return <MultiChoice block={block} {...exerciseProps} />;
+  const EXERCISE_BLOCKS = {
+    "sentence-builder": SentenceBuilder,
+    "fill-blank": FillBlank,
+    "match-pairs": MatchPairs,
+    "multi-choice": MultiChoice,
+  };
+  const ExerciseCmp = EXERCISE_BLOCKS[block.type];
+  if (ExerciseCmp) {
+    return (
+      <div className={styles.exerciseWrap}>
+        <ExerciseCmp block={block} {...exerciseProps} />
+        {/* Skip: tylko dla gate'ów które jeszcze nie odblokowały dalszej treści */}
+        {isGate && !gateCompleted && (
+          <button
+            className={styles.skipExerciseBtn}
+            onClick={handleExerciseComplete}
+            aria-label="Pomiń to ćwiczenie i odblokuj dalszą część"
+            title="Pomiń ćwiczenie"
+          >
+            Pomiń ćwiczenie →
+          </button>
+        )}
+      </div>
+    );
+  }
 
   if (block.type === "lecturer-cta") {
     return <LecturerCTA block={block} />;
