@@ -8,6 +8,25 @@ Nazwa pliku podana przy każdej kwestii.
 Generuj osobno — jeden plik = jeden request w ElevenLabs.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  MAPA GŁOSÓW (kto ma jaki głos) — na przyszłość
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Postać        Głos ElevenLabs              voice_id
+  ------------  ---------------------------  --------------------
+  Marek / Jan   Adam - Dominant, Firm        pNInz6obpgDQGcFmaJgB
+  Pracownica    Alice - Clear, Engaging Edu  Xb7hH8MSUJpSbSDYk0k2
+  Kierowca      Liam - Energetic, Social     TX3LPaxmHKxFdv7VOQHJ
+  Hipek         Adam - Dominant, Firm        pNInz6obpgDQGcFmaJgB
+  Rosa          Sarah - Mature, Reassuring   EXAVITQu4vr4xnSDxMaL
+  Omar          Eric - Smooth, Trustworthy   cjVigY5qzO86Huf0OWal
+  Carlos        Liam - Energetic, Social     TX3LPaxmHKxFdv7VOQHJ
+
+  UWAGA: Marek i Jan to ta sama postać (Polak Jan Kowalski), więc
+  ten sam głos = Adam. Hipek też używa Adama. Model dla wszystkich:
+  eleven_multilingual_v2. Konto free: można używać tylko głosów
+  premade (library voices zwracają HTTP 402 przez API).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   GŁOS: MAREK
   Charakter: młody Polak (~30 lat), lekko zagubiony ale sympatyczny,
   akcent polski słyszalny przy hiszpańskim — to celowe i naturalne.
@@ -132,11 +151,14 @@ Z tymi dwoma zwrotami przeżyjesz pierwsze dni w Hiszpanii.
   (library voices wymagają płatnego planu, zwracają HTTP 402).
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  GŁOS: JAN  ->  "Chris" (iP95p4xoKVk53GoZ742B)
+  GŁOS: JAN  ->  docelowo "Adam" (pNInz6obpgDQGcFmaJgB) == Marek z lekcji 1
     l2_jan_01.mp3   Hola Rosa. Me llamo Jan, soy de Polonia.
     l2_jan_02.mp3   Un poco… muy poco.
     l2_jan_03.mp3   Rosa… ¿cómo se dice esto en español?
     l2_jan_04.mp3   Encantado, Omar. Yo soy programador.
+    (UWAGA: aktualne pliki wygenerowane głosem "Chris" — do podmiany
+     na Adama żeby Jan brzmiał tak samo jak Marek. Regeneracja przy
+     najbliższej okazji gdy klucz sk_ jest w env.)
 
   GŁOS: ROSA  ->  "Sarah" (EXAVITQu4vr4xnSDxMaL) — kobiecy, ciepły, profesjonalny
     l2_rosa_01.mp3  ¡Bienvenido! Soy Rosa, soy de Valencia.
