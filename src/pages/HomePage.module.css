@@ -5,233 +5,311 @@
   font-family: "Inter", system-ui, sans-serif;
 }
 
-/* ── Header ─────────────────────────────────────────────────────────────── */
-.header {
-  background: linear-gradient(135deg, #c0392b 0%, #e74c3c 50%, #f39c12 100%);
-  padding: 48px 24px 40px;
-  text-align: center;
+/* ── Hero ────────────────────────────────────────────────────────────────── */
+.hero {
+  background:
+    radial-gradient(1200px 400px at 15% -10%, rgba(255,255,255,0.22), transparent 60%),
+    linear-gradient(135deg, #b83223 0%, #e05a3b 45%, #f0a531 100%);
   color: white;
+  padding: 56px 24px 64px;
 }
 
-.logo {
-  font-size: 2.4rem;
+.heroInner {
+  max-width: 960px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.heroCopy {
+  flex: 1;
+  min-width: 0;
+}
+
+.kicker {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(255,255,255,0.18);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 2.8rem;
   font-weight: 800;
-  margin: 0 0 8px;
-  letter-spacing: -0.5px;
+  letter-spacing: -1px;
+  margin: 0 0 10px;
+  line-height: 1.05;
 }
 
 .tagline {
   font-size: 1.1rem;
-  opacity: 0.9;
-  margin: 0;
-  max-width: 480px;
-  margin-inline: auto;
+  opacity: 0.95;
+  margin: 0 0 24px;
+  max-width: 460px;
+  line-height: 1.5;
 }
 
-/* ── Hero card ───────────────────────────────────────────────────────────── */
-.hero {
-  padding: 32px 24px 0;
-  max-width: 720px;
-  margin-inline: auto;
-}
-
-.heroCard {
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   background: white;
-  border-radius: 16px;
-  padding: 24px;
+  color: #c0392b;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  transition: transform 0.12s, box-shadow 0.15s;
+}
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.24);
+}
+.ctaArrow { transition: transform 0.15s; }
+.ctaBtn:hover .ctaArrow { transform: translateX(3px); }
+
+.progressRow {
   display: flex;
-  gap: 20px;
   align-items: center;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  gap: 12px;
+  margin-top: 22px;
+  max-width: 380px;
 }
 
-.heroAvatar {
-  flex-shrink: 0;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+.progressBar {
+  flex: 1;
+  height: 8px;
+  background: rgba(255,255,255,0.28);
+  border-radius: 999px;
   overflow: hidden;
-  background: #e74c3c;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
 }
 
-.heroAvatar img {
-  width: 100%;
+.progressFill {
   height: 100%;
-  object-fit: cover;
-  position: absolute;
+  background: white;
+  border-radius: 999px;
+  transition: width 0.5s ease;
 }
 
-.heroAvatarPlaceholder {
-  font-size: 2rem;
-  font-weight: 700;
-  color: white;
+.progressText {
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0.95;
 }
 
-.heroText h2 {
-  margin: 0 0 8px;
-  font-size: 1.2rem;
+/* ── Cast ────────────────────────────────────────────────────────────────── */
+.heroCast {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 18px 22px;
+  align-items: end;
 }
 
-.heroText p {
+.castItem {
   margin: 0;
-  font-size: 0.95rem;
-  color: #555;
-  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
-/* ── Lessons ─────────────────────────────────────────────────────────────── */
-.lessonsSection {
-  max-width: 720px;
+.castItem :global(div[role="img"]) {
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  border: 3px solid rgba(255,255,255,0.85);
+}
+
+.castItem figcaption {
+  font-size: 0.78rem;
+  font-weight: 700;
+  opacity: 0.95;
+}
+
+.castPrimary {
+  grid-column: span 2;
+  justify-self: center;
+}
+.castPrimary figcaption {
+  font-size: 0.95rem;
+}
+
+/* ── Journey ─────────────────────────────────────────────────────────────── */
+.journey {
+  max-width: 640px;
   margin-inline: auto;
-  padding: 32px 24px;
+  padding: 44px 24px 20px;
 }
 
 .sectionTitle {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin: 0 0 16px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin: 0 0 24px;
 }
 
-.lessonList {
+.path {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.stop {
+  display: flex;
+  gap: 18px;
+}
+
+.stopMarkerCol {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-}
-
-.lessonCard {
-  display: flex;
   align-items: center;
-  gap: 16px;
-  background: white;
-  border: 2px solid transparent;
-  border-radius: 14px;
-  padding: 18px 20px;
-  cursor: pointer;
-  text-align: left;
-  width: 100%;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
-  transition: border-color 0.15s, transform 0.1s, box-shadow 0.15s;
-}
-
-.lessonCard:not(.locked):hover {
-  border-color: #e74c3c;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(231,76,60,0.15);
-}
-
-.lessonCard:not(.locked):active {
-  transform: translateY(0);
-}
-
-.lessonCard.locked {
-  opacity: 0.5;
-  cursor: not-allowed;
-  background: #f5f5f5;
-}
-
-.lessonCard.done {
-  border-color: #27ae60;
-}
-
-.lessonCard.done .lessonNumber {
-  background: #27ae60;
-}
-
-.lessonNumber {
   flex-shrink: 0;
+}
+
+.stopMarker {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: #e74c3c;
+  background: #d9cdbb;
   color: white;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
 }
 
-.lessonInfo {
+.stopDone { background: #27ae60; }
+.stopNext {
+  background: #e74c3c;
+  box-shadow: 0 0 0 4px rgba(231,76,60,0.22);
+}
+.stopLocked {
+  background: #e6ddd0;
+  font-size: 0.95rem;
+}
+
+.stopLine {
   flex: 1;
+  width: 3px;
+  background: #e6ddd0;
+  margin: 4px 0;
+  min-height: 24px;
+}
+
+.stopCard {
+  flex: 1;
+  text-align: left;
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  transition: border-color 0.15s, transform 0.1s, box-shadow 0.15s;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
 
-.lessonTitle {
-  font-size: 0.8rem;
-  font-weight: 600;
+.stopCard:not(.cardLocked):hover {
+  border-color: #e74c3c;
+  transform: translateX(3px);
+  box-shadow: 0 6px 18px rgba(231,76,60,0.14);
+}
+
+.cardLocked {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #f6f1e8;
+}
+
+.cardDone { border-color: #27ae60; }
+
+.stopHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stopLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
   color: #e74c3c;
+}
+
+.nextBadge,
+.doneBadge {
+  font-size: 0.65rem;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 999px;
 }
+.nextBadge { background: #e74c3c; color: white; }
+.doneBadge { background: #e3f6ea; color: #1e8449; }
 
-.lessonSubtitle {
-  font-size: 1rem;
-  font-weight: 700;
+.stopTitle {
+  font-size: 1.05rem;
+  font-weight: 800;
   color: #1a1a2e;
 }
 
-.lessonDesc {
-  font-size: 0.85rem;
+.stopDesc {
+  font-size: 0.88rem;
   color: #777;
+  line-height: 1.45;
   margin-top: 2px;
-}
-
-.lessonArrow {
-  color: #e74c3c;
-  font-size: 1.3rem;
-  flex-shrink: 0;
 }
 
 /* ── Footer ─────────────────────────────────────────────────────────────── */
 .footer {
   text-align: center;
-  padding: 24px;
-  color: #aaa;
+  padding: 28px 24px 40px;
+  color: #b0a596;
   font-size: 0.85rem;
 }
 
 /* ── Mobile ──────────────────────────────────────────────────────────────── */
-@media (max-width: 600px) {
-  .header {
-    padding: 32px 18px 28px;
+@media (max-width: 640px) {
+  .hero {
+    padding: 40px 18px 44px;
   }
-  .logo {
-    font-size: 1.8rem;
-  }
-  .tagline {
-    font-size: 0.98rem;
-  }
-
-  .hero,
-  .lessonsSection {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  /* avatar nad tekstem zamiast obok, żeby nie ściskać na wąskim ekranie */
-  .heroCard {
+  .heroInner {
     flex-direction: column;
-    text-align: center;
+    align-items: flex-start;
+    gap: 28px;
+  }
+  .title { font-size: 2.1rem; }
+  .tagline { font-size: 1rem; }
+
+  .heroCast {
+    align-self: center;
+    grid-template-columns: repeat(3, auto);
     gap: 14px;
-    padding: 20px;
+  }
+  /* na mobile bohater w rzędzie razem z resztą, bez wyróżnienia szerokością */
+  .castPrimary {
+    grid-column: auto;
   }
 
-  .lessonCard {
-    padding: 14px 16px;
-    gap: 12px;
-  }
-  .lessonNumber {
-    width: 38px;
-    height: 38px;
-    font-size: 1rem;
-  }
-  .lessonSubtitle {
-    font-size: 0.95rem;
-  }
+  .journey { padding: 32px 16px 12px; }
+  .stop { gap: 14px; }
+  .stopCard { padding: 14px 16px; }
 }

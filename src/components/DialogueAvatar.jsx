@@ -16,7 +16,9 @@ import styles from "./DialogueAvatar.module.css";
  *   row 2: scared    sad        smirk
  */
 
-const MAREK_EXPRESSIONS = {
+// Układ 3×3 taki sam dla wszystkich arkuszy postaci (marek.png oraz
+// wygenerowane *_faces.png). Kolumna/rząd wybiera wyraz twarzy.
+const EXPRESSIONS = {
   glasses:   { col: 0, row: 0 },
   surprised: { col: 1, row: 0 },
   happy:     { col: 2, row: 0 },
@@ -28,17 +30,25 @@ const MAREK_EXPRESSIONS = {
   smirk:     { col: 2, row: 2 },
 };
 
+// Arkusze twarzy per postać. "marek" wskazuje na oryginalny sprite w roocie.
+const SHEETS = {
+  marek:  "/marek.png",
+  rosa:   "/assets/characters/rosa_faces.png",
+  carlos: "/assets/characters/carlos_faces.png",
+  omar:   "/assets/characters/omar_faces.png",
+};
+
 export default function DialogueAvatar({ avatar, size = 44 }) {
   if (!avatar) {
     return <div className={styles.empty} style={{ width: size, height: size }} />;
   }
 
-  if (avatar.type === "marek") {
-    const { col, row } = MAREK_EXPRESSIONS[avatar.expression ?? "neutral"];
-    // background-size: 300% 300% makes each cell fill the container at 100%.
-    // background-position percentage selects which cell shows:
-    //   3 columns → 0%, 50%, 100% for col 0, 1, 2
-    //   3 rows    → 0%, 50%, 100% for row 0, 1, 2
+  // Sprite postaci: type == nazwa arkusza (marek/rosa/carlos/omar)
+  const sheet = SHEETS[avatar.type];
+  if (sheet) {
+    const { col, row } = EXPRESSIONS[avatar.expression ?? "neutral"];
+    // background-size: 300% 300% => każda komórka wypełnia kontener.
+    // background-position %: 0/50/100 dla kolumn i rzędów 0/1/2.
     const xPct = (col / 2) * 100;
     const yPct = (row / 2) * 100;
 
@@ -48,13 +58,13 @@ export default function DialogueAvatar({ avatar, size = 44 }) {
         style={{
           width: size,
           height: size,
-          backgroundImage: `url('${asset("/marek.png")}')`,
+          backgroundImage: `url('${asset(sheet)}')`,
           backgroundSize: "300% 300%",
           backgroundPosition: `${xPct}% ${yPct}%`,
           flexShrink: 0,
         }}
         role="img"
-        aria-label={`Marek, ${avatar.expression ?? "neutral"}`}
+        aria-label={`${avatar.type}, ${avatar.expression ?? "neutral"}`}
       />
     );
   }

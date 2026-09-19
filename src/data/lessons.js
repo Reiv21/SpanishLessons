@@ -2,6 +2,9 @@ import { HERO_NAME } from "../config";
 
 // ─── Shared avatar definitions ────────────────────────────────────────────────
 const AVATAR_JAN = (expression) => ({ type: "marek", expression }); // sprite sheet still named marek.png
+const AVATAR_ROSA   = (expression) => ({ type: "rosa", expression });
+const AVATAR_OMAR   = (expression) => ({ type: "omar", expression });
+const AVATAR_CARLOS = (expression) => ({ type: "carlos", expression });
 const AVATAR_AIRPORT_WORKER = {
   type: "image",
   src: "/fluatendant.png",
@@ -439,7 +442,7 @@ const lessons = [
           {
             speaker: "other",
             speakerLabel: "Rosa",
-            avatar: { type: "initials", text: "R", color: "#e74c3c" },
+            avatar: AVATAR_ROSA("happy"),
             es: "¡Bienvenido! Soy Rosa, soy de Valencia.",
             pl: "Witaj! Jestem Rosa, jestem z Walencji.",
             audioSrc: "/assets/audio/l2_rosa_01.mp3",
@@ -455,7 +458,7 @@ const lessons = [
           {
             speaker: "other",
             speakerLabel: "Rosa",
-            avatar: { type: "initials", text: "R", color: "#e74c3c" },
+            avatar: AVATAR_ROSA("surprised"),
             es: "¡Qué interesante! ¿Hablas español?",
             pl: "Jak ciekawie! Mówisz po hiszpańsku?",
             audioSrc: "/assets/audio/l2_rosa_02.mp3",
@@ -471,7 +474,7 @@ const lessons = [
           {
             speaker: "other",
             speakerLabel: "Rosa",
-            avatar: { type: "initials", text: "R", color: "#e74c3c" },
+            avatar: AVATAR_ROSA("laughing"),
             es: "¡No te preocupes! Aquí vas a aprender rápido.",
             pl: "Nie martw się! Tutaj szybko się nauczysz.",
             audioSrc: "/assets/audio/l2_rosa_03.mp3",
@@ -529,7 +532,7 @@ const lessons = [
           {
             speaker: "other",
             speakerLabel: "Rosa",
-            avatar: { type: "initials", text: "R", color: "#e74c3c" },
+            avatar: AVATAR_ROSA("neutral"),
             es: "¿El frigorífico? Bueno, en España decimos «frigorífico»…",
             pl: "Lodówka? No, w Hiszpanii mówimy «frigorífico»…",
             audioSrc: "/assets/audio/l2_rosa_04.mp3",
@@ -588,7 +591,7 @@ const lessons = [
           {
             speaker: "other",
             speakerLabel: "Omar",
-            avatar: { type: "initials", text: "O", color: "#27ae60" },
+            avatar: AVATAR_OMAR("neutral"),
             es: "Soy Omar. Soy de Marruecos. Estudio arquitectura.",
             pl: "Jestem Omar. Jestem z Maroka. Studiuję architekturę.",
             audioSrc: "/assets/audio/l2_omar_01.mp3",
@@ -604,7 +607,7 @@ const lessons = [
           {
             speaker: "other",
             speakerLabel: "Carlos",
-            avatar: { type: "initials", text: "C", color: "#8e44ad" },
+            avatar: AVATAR_CARLOS("happy"),
             es: "¡Y yo soy Carlos, de México! Trabajo en un restaurante.",
             pl: "A ja jestem Carlos, z Meksyku! Pracuję w restauracji.",
             audioSrc: "/assets/audio/l2_carlos_01.mp3",
