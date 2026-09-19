@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { asset } from "../../utils/asset";
 import styles from "./FillBlank.module.css";
 
 // Special characters needed for Spanish writing
@@ -43,7 +44,7 @@ export default function FillBlank({ block, onComplete }) {
 
   function playAudio() {
     if (!block.audioSrc) return;
-    new Audio(block.audioSrc).play().catch(() => {});
+    new Audio(asset(block.audioSrc)).play().catch(() => {});
   }
 
   // Insert char at current cursor position in the input

@@ -183,3 +183,23 @@
   color: #aaa;
   margin: 0;
 }
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .wrapper {
+    bottom: 16px;
+    right: 16px;
+    /* zostaw margines z lewej żeby panel nie wychodził poza ekran */
+    left: 16px;
+    align-items: flex-end;
+  }
+  .bubble {
+    width: 54px;
+    height: 54px;
+  }
+  /* panel na całą dostępną szerokość zamiast sztywnych 260px */
+  .panel {
+    width: 100%;
+    max-width: 320px;
+  }
+}

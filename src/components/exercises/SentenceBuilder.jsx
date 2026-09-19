@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { asset } from "../../utils/asset";
 import styles from "./SentenceBuilder.module.css";
 
 /**
@@ -49,7 +50,7 @@ export default function SentenceBuilder({ block, onComplete, completed }) {
 
   function playAudio() {
     if (!block.audioSrc) return;
-    new Audio(block.audioSrc).play().catch(() => {});
+    new Audio(asset(block.audioSrc)).play().catch(() => {});
   }
 
   const canCheck = built.length === block.words.length;

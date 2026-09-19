@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { MASCOT_NAME } from "../config";
+import { asset } from "../utils/asset";
 import styles from "./Hipek.module.css";
 
 /**
@@ -28,7 +29,7 @@ export default function Hipek({ cues = [], activeCueIndex = null }) {
     if (!src) return;
     if (audioRef.current) {
       audioRef.current.pause();
-      audioRef.current.src = src;
+      audioRef.current.src = asset(src);
       audioRef.current.play().catch(() => {});
       setPlaying(true);
     }
@@ -48,7 +49,7 @@ export default function Hipek({ cues = [], activeCueIndex = null }) {
   return (
     <div className={styles.wrapper}>
       {open && (
-        <div className={styles.panel} role="dialog" aria-label={`${MASCOT_NAME} — wskazówki`}>
+        <div className={styles.panel} role="dialog" aria-label={`${MASCOT_NAME}: wskazówki`}>
           <div className={styles.panelHeader}>
             <span className={styles.panelTitle}>{MASCOT_NAME} mówi</span>
             <button
@@ -94,7 +95,7 @@ export default function Hipek({ cues = [], activeCueIndex = null }) {
         title={MASCOT_NAME}
       >
         <img
-          src="/assets/characters/hipek_idle.png"
+          src={asset("/assets/characters/hipek_idle.png")}
           alt={MASCOT_NAME}
           onError={(e) => { e.target.style.display = "none"; }}
         />

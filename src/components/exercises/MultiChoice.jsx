@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { asset } from "../../utils/asset";
 import styles from "./MultiChoice.module.css";
 
 /**
@@ -86,7 +87,7 @@ export default function MultiChoice({ block, onComplete }) {
             >
               {opt.imgSrc && (
                 <img
-                  src={opt.imgSrc}
+                  src={asset(opt.imgSrc)}
                   alt={opt.text}
                   className={styles.optImg}
                   onError={(e) => { e.target.style.display = "none"; }}
@@ -103,7 +104,7 @@ export default function MultiChoice({ block, onComplete }) {
         <p className={`${styles.feedback} ${isCorrect ? styles.feedbackOk : styles.feedbackNo}`}>
           {isCorrect
             ? (block.feedbackCorrect ?? "Dobrze! Historia potwierdzi Twoją odpowiedź.")
-            : (block.feedbackWrong  ?? "Nie do końca — ale zaraz się przekonasz jak jest naprawdę!")}
+            : (block.feedbackWrong  ?? "Nie do końca, ale zaraz się przekonasz jak jest naprawdę!")}
         </p>
       )}
 

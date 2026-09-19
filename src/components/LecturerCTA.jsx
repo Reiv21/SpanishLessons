@@ -21,7 +21,7 @@ export default function LecturerCTA({ block }) {
       </div>
       <h3 className={styles.title}>{block.title ?? "Chcesz poćwiczyć materiał na żywo?"}</h3>
       <p className={styles.body}>
-        {block.body ?? `Zarezerwuj krótką konsultację z lektorem i wykorzystaj właśnie poznany materiał w prawdziwej rozmowie. Bez presji — wystarczy 15–20 minut.`}
+        {block.body ?? `Zarezerwuj krótką konsultację z lektorem i wykorzystaj właśnie poznany materiał w prawdziwej rozmowie. Bez presji, wystarczy 15-20 minut.`}
       </p>
       {block.ctaHref ? (
         <a

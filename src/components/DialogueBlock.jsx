@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import DialogueAvatar from "./DialogueAvatar";
+import { asset } from "../utils/asset";
 import styles from "./DialogueBlock.module.css";
 
 /**
@@ -24,7 +25,7 @@ export default function DialogueBlock({ block }) {
     if (!line?.audioSrc || !audioRef.current) return;
 
     audioRef.current.pause();
-    audioRef.current.src = line.audioSrc;
+    audioRef.current.src = asset(line.audioSrc);
     audioRef.current.load();
     audioRef.current.play().catch(() => {});
   }, [block.lines]);
@@ -51,7 +52,7 @@ export default function DialogueBlock({ block }) {
 
       if (line.audioSrc && audioRef.current) {
         audioRef.current.pause();
-        audioRef.current.src = line.audioSrc;
+        audioRef.current.src = asset(line.audioSrc);
         audioRef.current.load();
 
         await new Promise((resolve) => {

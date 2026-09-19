@@ -1,3 +1,4 @@
+import { asset } from "../utils/asset";
 import styles from "./DialogueAvatar.module.css";
 
 /**
@@ -47,13 +48,13 @@ export default function DialogueAvatar({ avatar, size = 44 }) {
         style={{
           width: size,
           height: size,
-          backgroundImage: "url('/marek.png')",
+          backgroundImage: `url('${asset("/marek.png")}')`,
           backgroundSize: "300% 300%",
           backgroundPosition: `${xPct}% ${yPct}%`,
           flexShrink: 0,
         }}
         role="img"
-        aria-label={`Marek — ${avatar.expression ?? "neutral"}`}
+        aria-label={`Marek, ${avatar.expression ?? "neutral"}`}
       />
     );
   }
@@ -66,7 +67,7 @@ export default function DialogueAvatar({ avatar, size = 44 }) {
         role="img"
         aria-label={avatar.alt ?? ""}
       >
-        <img src={avatar.src} alt={avatar.alt ?? ""} className={styles.singleImg} />
+        <img src={asset(avatar.src)} alt={avatar.alt ?? ""} className={styles.singleImg} />
       </div>
     );
   }

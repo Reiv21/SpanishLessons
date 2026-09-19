@@ -5,9 +5,8 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>spanishlessons</title>
-  </head>
-  <body>
-    <!-- Odtwarza ścieżkę zakodowaną przez 404.html (SPA fallback dla GitHub Pages) -->
+    <!-- Odtwarza ścieżkę zakodowaną przez 404.html (SPA fallback dla GitHub Pages).
+         Musi być w <head> PRZED skryptem aplikacji, żeby router zobaczył już poprawny URL. -->
     <script>
       (function () {
         var l = window.location;
@@ -19,6 +18,8 @@
         }
       })();
     </script>
+  </head>
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

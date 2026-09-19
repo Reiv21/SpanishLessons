@@ -124,3 +124,33 @@ Z tymi dwoma zwrotami przeżyjesz pierwsze dni w Hiszpanii.
 
   Wszystkie pliki wrzuć do: /public/assets/audio/
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  LEKCJA 2: Jan poznaje współlokatorów (10 plików, WYGENEROWANE)
+  Model: eleven_multilingual_v2. Konto free, więc użyto głosów premade
+  (library voices wymagają płatnego planu, zwracają HTTP 402).
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  GŁOS: JAN  ->  "Chris" (iP95p4xoKVk53GoZ742B)
+    l2_jan_01.mp3   Hola Rosa. Me llamo Jan, soy de Polonia.
+    l2_jan_02.mp3   Un poco… muy poco.
+    l2_jan_03.mp3   Rosa… ¿cómo se dice esto en español?
+    l2_jan_04.mp3   Encantado, Omar. Yo soy programador.
+
+  GŁOS: ROSA  ->  "Sarah" (EXAVITQu4vr4xnSDxMaL) — kobiecy, ciepły, profesjonalny
+    l2_rosa_01.mp3  ¡Bienvenido! Soy Rosa, soy de Valencia.
+    l2_rosa_02.mp3  ¡Qué interesante! ¿Hablas español?
+    l2_rosa_03.mp3  ¡No te preocupes! Aquí vas a aprender rápido.
+    l2_rosa_04.mp3  ¿El frigorífico? Bueno, en España decimos «frigorífico»…
+
+  GŁOS: OMAR  ->  "Eric" (cjVigY5qzO86Huf0OWal) — spokojny, wyważony
+    l2_omar_01.mp3  Soy Omar. Soy de Marruecos. Estudio arquitectura.
+
+  GŁOS: CARLOS  ->  "Liam" (TX3LPaxmHKxFdv7VOQHJ) — energiczny
+    l2_carlos_01.mp3  ¡Y yo soy Carlos, de México! Trabajo en un restaurante.
+
+  Uwaga: głosy premade brzmią z akcentem angielskim przy hiszpańskim.
+  Jeśli konto zostanie podniesione do planu płatnego, można podmienić
+  Jana na "Tomasz" (g8ZOdhoD9R6eYKPTjKbE, PL) i Carlosa na "Miquel"
+  (eZCjPaC4W7mcOOERqE5n, ES) dla lepszego brzmienia.

@@ -662,3 +662,59 @@
   border-left: 3px solid #e67e22;
   font-style: italic;
 }
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .topBar {
+    padding: 10px 14px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .lessonSub {
+    font-size: 0.9rem;
+  }
+  /* pasek postępu węższy, żeby zmieścił się obok tytułu */
+  .progressTrack {
+    width: 56px;
+  }
+  .phaseLabel {
+    display: none;
+  }
+
+  .cutsceneWrapper,
+  .learnWrapper,
+  .quizWrapper {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .learnWrapper {
+    padding-top: 24px;
+  }
+  .learnContent {
+    gap: 28px;
+  }
+
+  .storySection,
+  .dialogueBlock {
+    padding: 16px 14px;
+  }
+
+  /* dymki dialogu szersze na telefonie, bo 70% jest za wąskie */
+  .dialogueBubble {
+    max-width: 82%;
+  }
+
+  .vocabGrid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+
+  .placeholderOverlay {
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+  }
+  .speechBubble {
+    max-width: 90%;
+  }
+}

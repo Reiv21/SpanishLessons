@@ -119,7 +119,7 @@ function Results({ score, total, pct }) {
       </p>
       {!passed && (
         <p className={styles.resultsHint}>
-          Wróć do słówek i spróbuj jeszcze raz — reload strony resetuje quiz.
+          Wróć do słówek i spróbuj jeszcze raz. Odświeżenie strony resetuje quiz.
         </p>
       )}
     </div>

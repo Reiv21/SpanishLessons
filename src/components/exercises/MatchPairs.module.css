@@ -135,3 +135,17 @@
   transition: background 0.15s, color 0.15s;
 }
 .resetBtn:hover { background: #16a085; color: white; }
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .wrapper {
+    padding: 16px 14px;
+  }
+  .grid {
+    gap: 10px;
+  }
+  .card {
+    padding: 10px 10px;
+    font-size: 0.9rem;
+  }
+}

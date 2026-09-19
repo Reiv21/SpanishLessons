@@ -11,6 +11,7 @@ import MatchPairs from "../components/exercises/MatchPairs";
 import MultiChoice from "../components/exercises/MultiChoice";
 import DialogueBlock from "../components/DialogueBlock";
 import LecturerCTA from "../components/LecturerCTA";
+import { asset } from "../utils/asset";
 import styles from "./LessonPage.module.css";
 
 const PHASE = { CUTSCENE: "cutscene", LEARN: "learn", QUIZ: "quiz" };
@@ -128,8 +129,8 @@ export default function LessonPage() {
               <video
                 ref={videoRef}
                 className={styles.video}
-                src={lesson.cutscene.src}
-                poster={lesson.cutscene.poster}
+                src={asset(lesson.cutscene.src)}
+                poster={asset(lesson.cutscene.poster)}
                 controls
                 onEnded={() => setPhase(PHASE.LEARN)}
               />
@@ -257,7 +258,7 @@ function CutscenePlaceholder({ lesson }) {
     <div className={styles.cutscenePlaceholder}>
       <div className={styles.placeholderScene}>
         <img
-          src="/assets/backgrounds/airport.jpg"
+          src={asset("/assets/backgrounds/airport.jpg")}
           alt="Lotnisko"
           className={styles.placeholderBg}
           onError={(e) => { e.target.style.display = "none"; }}
@@ -351,7 +352,7 @@ function ContentBlock({ block, isGate, onGateComplete }) {
             {block.examples.map((ex, i) => (
               <li key={i}>
                 <strong>{ex.es}</strong>
-                <span> — {ex.pl}</span>
+                <span> &middot; {ex.pl}</span>
               </li>
             ))}
           </ul>
@@ -402,7 +403,7 @@ function VocabCard({ word, index, onClick, hasHipekCue }) {
     <button
       className={`${styles.vocabCard} ${hasHipekCue ? styles.vocabHasCue : ""}`}
       onClick={() => onClick(index)}
-      aria-label={`${word.es} — ${word.pl}`}
+      aria-label={`${word.es}: ${word.pl}`}
     >
       {hasHipekCue && <span className={styles.cueIndicator} title="Hipek ma wskazówkę!">H</span>}
       <span className={styles.vocabEs}>{word.es}</span>

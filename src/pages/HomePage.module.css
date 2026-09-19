@@ -195,3 +195,43 @@
   color: #aaa;
   font-size: 0.85rem;
 }
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .header {
+    padding: 32px 18px 28px;
+  }
+  .logo {
+    font-size: 1.8rem;
+  }
+  .tagline {
+    font-size: 0.98rem;
+  }
+
+  .hero,
+  .lessonsSection {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* avatar nad tekstem zamiast obok, żeby nie ściskać na wąskim ekranie */
+  .heroCard {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+    padding: 20px;
+  }
+
+  .lessonCard {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  .lessonNumber {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+  .lessonSubtitle {
+    font-size: 0.95rem;
+  }
+}

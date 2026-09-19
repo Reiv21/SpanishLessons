@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { PLATFORM_NAME, HERO_NAME, TAGLINE } from "../config";
 import lessons from "../data/lessons";
 import { getProgress } from "../utils/progress";
+import { asset } from "../utils/asset";
 import styles from "./HomePage.module.css";
 
 export default function HomePage() {
@@ -19,7 +20,7 @@ export default function HomePage() {
         <div className={styles.heroCard}>
           <div className={styles.heroAvatar}>
             <img
-              src="/assets/characters/marek_neutral.png"
+              src={asset("/assets/characters/marek_neutral.png")}
               alt={HERO_NAME}
               onError={(e) => { e.target.style.display = "none"; }}
             />
@@ -30,7 +31,7 @@ export default function HomePage() {
             <p>
               Polak, 30 lat, właśnie wylądował w Barcelonie z jedną walizką
               i zerową znajomością hiszpańskiego. Towarzysz mu w tej przygodzie
-              — i przy okazji naucz się języka.
+              i przy okazji naucz się języka.
             </p>
           </div>
         </div>
@@ -70,7 +71,7 @@ function LessonCard({ lesson, done, onClick }) {
       className={`${styles.lessonCard} ${locked ? styles.locked : ""} ${done ? styles.done : ""}`}
       onClick={onClick}
       disabled={locked}
-      aria-label={`${lesson.title}: ${lesson.subtitle}${locked ? " — zablokowana" : ""}`}
+      aria-label={`${lesson.title}: ${lesson.subtitle}${locked ? ", zablokowana" : ""}`}
     >
       <div className={styles.lessonNumber}>
         {done ? "✓" : locked ? "🔒" : lesson.id}

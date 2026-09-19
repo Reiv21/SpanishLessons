@@ -62,7 +62,7 @@ const lessons = [
       // ═══ CZĘŚĆ 1: Pierwsze kroki ══════════════════════════════════════
       {
         type: "text",
-        text: `${HERO_NAME} Kowalski wylądował na lotnisku El Prat o 14:30. W plecaku: laptop, słuchawki i nadzieja na nowe życie w Barcelonie. Na taśmie bagażowej kręcą się walizki innych pasażerów — ale nie jego.`,
+        text: `${HERO_NAME} Kowalski wylądował na lotnisku El Prat o 14:30. W plecaku: laptop, słuchawki i nadzieja na nowe życie w Barcelonie. Na taśmie bagażowej kręcą się walizki innych pasażerów, ale nie jego.`,
       },
       {
         type: "text",
@@ -117,7 +117,7 @@ const lessons = [
       },
       {
         type: "tip",
-        text: `"Perdona" to miękkie przepraszam — używasz żeby zagadać obcą osobę. "Lo siento" zostawiasz na sytuacje gdy coś zepsułeś lub kogoś uraziłeś.`,
+        text: `"Perdona" to miękkie przepraszam, którego używasz żeby zagadać obcą osobę. "Lo siento" zostawiasz na sytuacje gdy coś zepsułeś lub kogoś uraziłeś.`,
       },
 
       // ── GATE 1: dopasuj słówka z dialogu ── (odblokowuje notę kulturową + gramatykę)
@@ -138,12 +138,12 @@ const lessons = [
       {
         type: "cultural",
         title: "Jak mówi się po katalońsku?",
-        body: `Barcelona leży w Katalonii — regionie z własnym językiem. Na ulicach usłyszysz zarówno hiszpański (castellano), jak i kataloński (català). Pracownicy lotniska mówią po hiszpańsku, ale szyldy często są dwujęzyczne.`,
-        fact: `"Gràcies" (gra-si-es) to dziękuję po katalońsku. Bardzo podobne do hiszpańskiego "gracias" — nie pomylisz się.`,
+        body: `Barcelona leży w Katalonii, regionie z własnym językiem. Na ulicach usłyszysz zarówno hiszpański (castellano), jak i kataloński (català). Pracownicy lotniska mówią po hiszpańsku, ale szyldy często są dwujęzyczne.`,
+        fact: `"Gràcies" (gra-si-es) to dziękuję po katalońsku. Bardzo podobne do hiszpańskiego "gracias", więc się nie pomylisz.`,
       },
       {
         type: "grammar",
-        title: "¿Dónde está…? — Gdzie jest…?",
+        title: "¿Dónde está…?, czyli Gdzie jest…?",
         body: `"¿Dónde?" znaczy "gdzie?", a "está" to forma czasownika "być" opisująca miejsce lub stan tymczasowy. Wystarczy wstawić po "está" nazwę rzeczy, której szukasz.`,
         examples: [
           { es: "¿Dónde está mi maleta?",     pl: "Gdzie jest moja walizka?" },
@@ -162,18 +162,18 @@ const lessons = [
         before: "¿Dónde",
         after: "mi maleta?",
         answer: "está",
-        hint: "Forma czasownika 'estar' — używamy dla miejsca.",
+        hint: "Forma czasownika 'estar', używana dla miejsca.",
         translation: "¿Dónde está mi maleta?",
       },
 
       // ═══ CZĘŚĆ 3: Historia ciągnie się dalej (odblokowane po gate 2) ══
       {
         type: "text",
-        text: `Pracownica znalazła walizkę — była na taśmie nr 4 zamiast 7. ${HERO_NAME} dziękuje, bierze torbę i rusza do wyjścia. Na zewnątrz czeka taksówka z kartką "JAN KOWALSKI".`,
+        text: `Pracownica znalazła walizkę. Była na taśmie nr 4 zamiast 7. ${HERO_NAME} dziękuje, bierze torbę i rusza do wyjścia. Na zewnątrz czeka taksówka z kartką "JAN KOWALSKI".`,
       },
       {
         type: "text",
-        text: `Kierowca jest rozmowny. Kiwa głową, bierze walizkę i zaczyna mówić szybko po hiszpańsku. ${HERO_NAME} rozumie połowę — ale tej ważniejszej połowy.`,
+        text: `Kierowca jest rozmowny. Kiwa głową, bierze walizkę i zaczyna mówić szybko po hiszpańsku. ${HERO_NAME} rozumie połowę, ale nie tę ważniejszą.`,
       },
 
       // Dialog 2 — taksówka
@@ -216,7 +216,7 @@ const lessons = [
       },
       {
         type: "tip",
-        text: `"¿Todo bien?" to popularne powitanie — dosłownie "wszystko dobrze?". Odpowiadasz "Sí, bien" albo po prostu "Bien, gracias". Nie musisz rozwijać tematu.`,
+        text: `"¿Todo bien?" to popularne powitanie, dosłownie "wszystko dobrze?". Odpowiadasz "Sí, bien" albo po prostu "Bien, gracias". Nie musisz rozwijać tematu.`,
       },
 
       // ── GATE 3: ułóż zdanie z dialogu 2 ── (odblokowuje gramatykę 2 + kulturę 2)
@@ -232,8 +232,8 @@ const lessons = [
       // ═══ CZĘŚĆ 4: Gramatyka 2 + kultura 2 (odblokowane po gate 3) ══════
       {
         type: "grammar",
-        title: "Mi, tu, su — mój, twój, jego/jej",
-        body: `Zaimki dzierżawcze w hiszpańskim stoją przed rzeczownikiem i nie odmieniają się przez rodzaj — w przeciwieństwie do polskiego. "Mi" zawsze znaczy "mój/moja/moje".`,
+        title: "Mi, tu, su, czyli mój, twój, jego/jej",
+        body: `Zaimki dzierżawcze w hiszpańskim stoją przed rzeczownikiem i nie odmieniają się przez rodzaj, w przeciwieństwie do polskiego. "Mi" zawsze znaczy "mój/moja/moje".`,
         examples: [
           { es: "Mi maleta",  pl: "Moja walizka" },
           { es: "Tu maleta",  pl: "Twoja walizka" },
@@ -245,14 +245,14 @@ const lessons = [
         type: "cultural",
         title: "Barcelońskie taksówki",
         body: `Taksówki w Barcelonie są żółto-czarne i mają wyraźne taryfy na szybach. Kierowcy zazwyczaj mówią po katalońsku i hiszpańsku, rzadziej po angielsku. "Al centre" albo podanie adresu wystarczą, żeby dotrzeć na miejsce.`,
-        fact: `Barcelona ma też rozbudowaną sieć metra — Metro de Barcelona. Linia L1 (czerwona) i L3 (zielona) pokrywają większość centrum. Bilet jednorazowy kosztuje ok. 2,40 EUR.`,
+        fact: `Barcelona ma też rozbudowaną sieć metra, czyli Metro de Barcelona. Linia L1 (czerwona) i L3 (zielona) pokrywają większość centrum. Bilet jednorazowy kosztuje ok. 2,40 EUR.`,
       },
 
       // ── GATE 4: finalne utrwalenie ── (odblokowuje zakończenie)
       {
         type: "match-pairs",
         gate: true,
-        instruction: "Finalne utrwalenie — połącz wszystkie pary:",
+        instruction: "Finalne utrwalenie. Połącz wszystkie pary:",
         pairs: [
           { es: "¿Dónde está…?",  pl: "Gdzie jest…?" },
           { es: "Mi maleta",       pl: "Moja walizka" },
@@ -268,7 +268,7 @@ const lessons = [
       // ═══ ZAKOŃCZENIE (odblokowane po gate 4) ════════════════════════════
       {
         type: "text",
-        text: `Taksówka wjeżdża w Barcelonę od strony autostrady. ${HERO_NAME} patrzy przez okno na miasto — budynki z terakoty, palmy na pasie zieleni, kawiarnie z krzesłami wystawionymi na chodnik. Pierwsze zdanie po hiszpańsku już za nim.`,
+        text: `Taksówka wjeżdża w Barcelonę od strony autostrady. ${HERO_NAME} patrzy przez okno na miasto: budynki z terakoty, palmy na pasie zieleni, kawiarnie z krzesłami wystawionymi na chodnik. Pierwsze zdanie po hiszpańsku już za nim.`,
       },
       {
         type: "tip",
@@ -289,7 +289,7 @@ const lessons = [
         triggerAfterVocabIndex: 5,
       },
       {
-        label: "'Estar' vs 'ser' — dwa 'być'",
+        label: "'Estar' vs 'ser', dwa 'być'",
         audioSrc: "/assets/audio/hipek_03.mp3",
         triggerAfterVocabIndex: 8,
       },
@@ -401,11 +401,11 @@ const lessons = [
       // Funkcja: wprowadzenie kontekstu i wzbudzenie ciekawości
       {
         type: "text",
-        text: `${HERO_NAME} stoi przed drzwiami mieszkania przy ulicy Carrer de la Marina. Cztery piętra bez windy, walizka waży 23 kg. Za drzwiami słychać muzykę i rozmowę — przynajmniej dwie osoby. ${HERO_NAME} bierze oddech i naciska dzwonek.`,
+        text: `${HERO_NAME} stoi przed drzwiami mieszkania przy ulicy Carrer de la Marina. Cztery piętra bez windy, walizka waży 23 kg. Za drzwiami słychać muzykę i rozmowę co najmniej dwóch osób. ${HERO_NAME} bierze oddech i naciska dzwonek.`,
       },
       {
         type: "text",
-        text: `Drzwi otwiera uśmiechnięta dziewczyna. "¡Bienvenido!" — mówi i cofa się, żeby przepuścić ${HERO_NAME}a z walizką. W środku: kanapie dwóch facetów i kuchnia, z której wydobywa się zapach czosnku.`,
+        text: `Drzwi otwiera uśmiechnięta dziewczyna. "¡Bienvenido!", mówi i cofa się, żeby przepuścić ${HERO_NAME}a z walizką. W środku na kanapie siedzi dwóch facetów, a z kuchni wydobywa się zapach czosnku.`,
       },
 
       // ═══ ETAP 2: Pierwsze hipotezy ════════════════════════════════════
@@ -417,13 +417,13 @@ const lessons = [
         instruction: "Spójrz na imiona współlokatorów Jana. Skąd myślisz, że pochodzą?",
         multiple: false,
         options: [
-          { text: "Rosa — z Hiszpanii\nCarlos — z Meksyku\nOmar — z Maroka", correct: true },
-          { text: "Rosa — z Włoch\nCarlos — z Argentyny\nOmar — z Egiptu", correct: false },
-          { text: "Rosa — z Brazylii\nCarlos — z Hiszpanii\nOmar — z Algierii", correct: false },
+          { text: "Rosa: z Hiszpanii\nCarlos: z Meksyku\nOmar: z Maroka", correct: true },
+          { text: "Rosa: z Włoch\nCarlos: z Argentyny\nOmar: z Egiptu", correct: false },
+          { text: "Rosa: z Brazylii\nCarlos: z Hiszpanii\nOmar: z Algierii", correct: false },
           { text: "Wszyscy z Barcelony", correct: false },
         ],
-        feedbackCorrect: "Dokładnie! Właśnie o to chodzi w El Abanico — język hiszpański łączy ludzi z różnych krajów.",
-        feedbackWrong: "Nie do końca — zaraz się przekonasz. W tym mieszkaniu zebrały się cztery różne kultury.",
+        feedbackCorrect: "Dokładnie! Właśnie o to chodzi w El Abanico. Język hiszpański łączy ludzi z różnych krajów.",
+        feedbackWrong: "Nie do końca, zaraz się przekonasz. W tym mieszkaniu zebrały się cztery różne kultury.",
       },
 
       // ═══ ETAP 3: Historia — część 1 ══════════════════════════════════
@@ -431,7 +431,7 @@ const lessons = [
       // Funkcja: rozumienie imię, kraj, język, zawód
       {
         type: "text",
-        text: `— ¡Hola! Soy Rosa. — mówi dziewczyna, podając rękę. — Soy de Valencia, pero llevo dos años en Barcelona.`,
+        text: `"¡Hola! Soy Rosa", mówi dziewczyna, podając rękę. "Soy de Valencia, pero llevo dos años en Barcelona."`,
       },
       {
         type: "dialogue",
@@ -484,7 +484,7 @@ const lessons = [
       // Funkcja: zauważenie i utrwalenie struktur
       {
         type: "grammar",
-        title: "Przedstawianie się — trzy kluczowe zdania",
+        title: "Przedstawianie się w trzech zdaniach",
         body: `W rozmowie z Rosą Jan użył trzech podstawowych struktur. Wystarczą do pierwszego przedstawienia się w każdej sytuacji.`,
         examples: [
           { es: "Me llamo Jan.",         pl: "Mam na imię Jan." },
@@ -504,7 +504,7 @@ const lessons = [
         before: "Me",
         after: "Jan.",
         answer: "llamo",
-        hint: "'Me llamo' — dosłownie 'nazywam się', używasz zawsze przy przedstawianiu.",
+        hint: "'Me llamo' to dosłownie 'nazywam się', używasz zawsze przy przedstawianiu.",
         translation: "Me llamo Jan.",
       },
 
@@ -513,7 +513,7 @@ const lessons = [
       // Funkcja: strategia komunikacyjna ¿Cómo se dice…?
       {
         type: "text",
-        text: `Rosa pokazuje ${HERO_NAME}owi mieszkanie. Kuchnia, łazienka, pokoje. Jan chce zapytać o dużą białą rzecz w kuchni — ale jak to się po hiszpańsku mówi?`,
+        text: `Rosa pokazuje ${HERO_NAME}owi mieszkanie. Kuchnia, łazienka, pokoje. Jan chce zapytać o dużą białą rzecz w kuchni, ale jak to się po hiszpańsku mówi?`,
       },
       {
         type: "dialogue",
@@ -553,8 +553,8 @@ const lessons = [
       {
         type: "cultural",
         title: "Frigorífico czy nevera?",
-        body: `Carlos, współlokator z Meksyku, słysząc rozmowę krzyczy z salonu: "¡En México decimos 'refri'!" — Rosa śmieje się. To samo słowo, trzy nazwy. Język hiszpański jest oficjalnym językiem 21 krajów — i każdy kraj ma swoje słownictwo.`,
-        fact: `W Hiszpanii: frigorífico. W Meksyku i większości Ameryki Łacińskiej: refrigerador lub refri. W Argentynie: heladera. Wszystkie są poprawne — kontekst zawsze podpowie które użyć.`,
+        body: `Carlos, współlokator z Meksyku, słysząc rozmowę krzyczy z salonu: "¡En México decimos 'refri'!". Rosa śmieje się. To samo słowo, trzy nazwy. Język hiszpański jest oficjalnym językiem 21 krajów i każdy z nich ma swoje słownictwo.`,
+        fact: `W Hiszpanii: frigorífico. W Meksyku i większości Ameryki Łacińskiej: refrigerador lub refri. W Argentynie: heladera. Wszystkie są poprawne, a kontekst zawsze podpowie które użyć.`,
       },
 
       // ─── brak gate'a — kultura się nie "rozwiązuje", od razu widoczna po etapie 5 ───
@@ -580,7 +580,7 @@ const lessons = [
       // Odblokowane po zadaniu — Jan poznaje kolejnego współlokatora
       {
         type: "text",
-        text: `Po kolacji wszyscy siadają w salonie. Wchodzi Omar — milczący facet z książką pod pachą. Kiwa głową w stronę Jana i mówi tylko: "Hola."`,
+        text: `Po kolacji wszyscy siadają w salonie. Wchodzi Omar, milczący facet z książką pod pachą. Kiwa głową w stronę Jana i mówi tylko: "Hola."`,
       },
       {
         type: "dialogue",
@@ -621,7 +621,7 @@ const lessons = [
       },
       {
         type: "tip",
-        text: `W następnej lekcji Jan idzie na pierwsze zakupy. Nauczysz się liczb, kolorów i jak zapytać o cenę — czyli wszystkiego, czego potrzebujesz żeby przeżyć w barcelońskim sklepie spożywczym.`,
+        text: `W następnej lekcji Jan idzie na pierwsze zakupy. Nauczysz się liczb, kolorów i jak zapytać o cenę, czyli wszystkiego, czego potrzebujesz żeby przeżyć w barcelońskim sklepie spożywczym.`,
       },
 
       // ═══ ETAP 10: Kontakt z lektorem (opcjonalnie) ═══════════════════
@@ -629,7 +629,7 @@ const lessons = [
       {
         type: "lecturer-cta",
         title: "Chcesz poćwiczyć przedstawianie się na żywo?",
-        body: `Zarezerwuj krótką konsultację z lektorem El Abanico i wykorzystaj właśnie poznane zwroty w prawdziwej rozmowie. Wystarczy 15–20 minut — i już będziesz wiedział czy potrafisz się przedstawić bez ściągawki.`,
+        body: `Zarezerwuj krótką konsultację z lektorem El Abanico i wykorzystaj właśnie poznane zwroty w prawdziwej rozmowie. Wystarczy 15-20 minut, żeby sprawdzić czy potrafisz się przedstawić bez ściągawki.`,
         ctaLabel: "Zarezerwuj konsultację",
         ctaHref: null,  // podmień na URL systemu rezerwacji
       },
@@ -643,12 +643,12 @@ const lessons = [
         triggerAfterVocabIndex: 0,
       },
       {
-        label: "Soy vs estoy — różnica",
+        label: "Soy vs estoy, różnica",
         audioSrc: "/assets/audio/hipek_03.mp3",
         triggerAfterVocabIndex: 3,
       },
       {
-        label: "¿Cómo se dice? — jak używać",
+        label: "¿Cómo se dice?, jak używać",
         audioSrc: "/assets/audio/hipek_04.mp3",
         triggerAfterVocabIndex: 8,
       },
