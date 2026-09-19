@@ -1,21 +1,44 @@
-name: Deploy to Raspberry Pi
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
 
+# Uprawnienia potrzebne do publikacji na GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Tylko jeden deploy naraz
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd ~/SpanishLessons
-            git pull origin main
-            npm install --omit=dev
-            npm run build
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

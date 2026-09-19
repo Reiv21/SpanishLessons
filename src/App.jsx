@@ -4,7 +4,7 @@ import LessonPage from "./pages/LessonPage";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/lesson/:id" element={<LessonPage />} />
