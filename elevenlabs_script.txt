@@ -151,14 +151,11 @@ Z tymi dwoma zwrotami przeżyjesz pierwsze dni w Hiszpanii.
   (library voices wymagają płatnego planu, zwracają HTTP 402).
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  GŁOS: JAN  ->  docelowo "Adam" (pNInz6obpgDQGcFmaJgB) == Marek z lekcji 1
+  GŁOS: JAN  ->  "Adam" (pNInz6obpgDQGcFmaJgB) == Marek z lekcji 1
     l2_jan_01.mp3   Hola Rosa. Me llamo Jan, soy de Polonia.
     l2_jan_02.mp3   Un poco… muy poco.
     l2_jan_03.mp3   Rosa… ¿cómo se dice esto en español?
     l2_jan_04.mp3   Encantado, Omar. Yo soy programador.
-    (UWAGA: aktualne pliki wygenerowane głosem "Chris" — do podmiany
-     na Adama żeby Jan brzmiał tak samo jak Marek. Regeneracja przy
-     najbliższej okazji gdy klucz sk_ jest w env.)
 
   GŁOS: ROSA  ->  "Sarah" (EXAVITQu4vr4xnSDxMaL) — kobiecy, ciepły, profesjonalny
     l2_rosa_01.mp3  ¡Bienvenido! Soy Rosa, soy de Valencia.
