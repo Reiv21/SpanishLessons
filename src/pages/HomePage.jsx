@@ -29,15 +29,23 @@ export default function HomePage() {
             <h1 className={styles.title}>{PLATFORM_NAME}</h1>
             <p className={styles.tagline}>{TAGLINE}</p>
 
-            {nextLesson && (
+            <div className={styles.ctaRow}>
+              {nextLesson && (
+                <button
+                  className={styles.ctaBtn}
+                  onClick={() => navigate(`/lesson/${nextLesson.id}`)}
+                >
+                  {doneCount > 0 ? "Kontynuuj naukę" : "Zacznij od lekcji 1"}
+                  <span className={styles.ctaArrow}>→</span>
+                </button>
+              )}
               <button
-                className={styles.ctaBtn}
-                onClick={() => navigate(`/lesson/${nextLesson.id}`)}
+                className={styles.ctaSecondary}
+                onClick={() => navigate("/zadania")}
               >
-                {doneCount > 0 ? "Kontynuuj naukę" : "Zacznij od lekcji 1"}
-                <span className={styles.ctaArrow}>→</span>
+                Zadania testowe
               </button>
-            )}
+            </div>
 
             {totalUnlocked > 0 && (
               <div className={styles.progressRow}>

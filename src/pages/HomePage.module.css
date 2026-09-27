@@ -77,6 +77,26 @@
 .ctaArrow { transition: transform 0.15s; }
 .ctaBtn:hover .ctaArrow { transform: translateX(3px); }
 
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.ctaSecondary {
+  background: rgba(255,255,255,0.16);
+  color: white;
+  border: 1.5px solid rgba(255,255,255,0.55);
+  padding: 13px 22px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.ctaSecondary:hover { background: rgba(255,255,255,0.28); }
+
 .progressRow {
   display: flex;
   align-items: center;
