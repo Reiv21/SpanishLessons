@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import LessonPage from "./pages/LessonPage";
 import ExercisesPage from "./pages/ExercisesPage";
 import ExercisePlayground from "./pages/ExercisePlayground";
+import FaceTest from "./pages/FaceTest";
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Route path="/lesson/:id" element={<LessonPage />} />
         <Route path="/zadania" element={<ExercisesPage />} />
         <Route path="/zadania/:slug" element={<ExercisePlayground />} />
+        <Route path="/test-mimika" element={<FaceTest />} />
       </Routes>
     </BrowserRouter>
   );
