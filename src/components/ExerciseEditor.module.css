@@ -147,3 +147,60 @@
 @media (max-width: 600px) {
   .row { grid-template-columns: 1fr; }
 }
+
+/* ── Ściągawka formatowania ──────────────────────────────────────────────── */
+.formatHelp {
+  background: #fbf4ea;
+  border: 1px dashed #e2d3ba;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-top: -6px;
+}
+.formatHelpTitle {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #5a5044;
+}
+.formatTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.formatTable th {
+  text-align: left;
+  color: #a89a86;
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 2px 8px 6px 0;
+}
+.formatTable td {
+  padding: 4px 8px 4px 0;
+  vertical-align: top;
+  color: #4a4034;
+  border-top: 1px solid #efe3d0;
+}
+.formatTable code {
+  background: #fff;
+  border: 1px solid #e6d9c4;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.8rem;
+  color: #b0522f;
+  white-space: nowrap;
+}
+.formatHelpNote {
+  margin: 8px 0 0;
+  font-size: 0.76rem;
+  color: #877c6f;
+  line-height: 1.5;
+}
+.formatHelpNote code {
+  background: #fff;
+  border: 1px solid #e6d9c4;
+  border-radius: 4px;
+  padding: 0 4px;
+  color: #b0522f;
+}

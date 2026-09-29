@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { renderRich } from "../utils/richText";
 import styles from "./ExerciseEditor.module.css";
 
 /**
@@ -8,6 +10,8 @@ import styles from "./ExerciseEditor.module.css";
 export default function ExerciseEditor({ type, block, onChange, onApply }) {
   // pomocnik do aktualizacji pojedynczego pola
   const set = (patch) => onChange({ ...block, ...patch });
+  // tryb zaawansowanego formatowania — pokazuje ściągawkę składni
+  const [showFormatting, setShowFormatting] = useState(false);
 
   return (
     <form
@@ -29,10 +33,7 @@ export default function ExerciseEditor({ type, block, onChange, onApply }) {
           placeholder="np. Escena 1. El problema de Przemek"
         />
       </Field>
-      <Field
-        label="Polecenie"
-        hint="Można używać **pogrubienia**, *kursywy*, ==podświetlenia== i {czerwony:słowo}."
-      >
+      <Field label="Polecenie">
         <input
           className={styles.input}
           value={block.instruction ?? ""}
@@ -40,6 +41,17 @@ export default function ExerciseEditor({ type, block, onChange, onApply }) {
           placeholder="np. Relaciona español y polaco."
         />
       </Field>
+
+      {/* Tryb zaawansowanego formatowania tekstu */}
+      <label className={styles.checkboxField}>
+        <input
+          type="checkbox"
+          checked={showFormatting}
+          onChange={(e) => setShowFormatting(e.target.checked)}
+        />
+        <span>Zaawansowane formatowanie tekstu</span>
+      </label>
+      {showFormatting && <FormattingHelp />}
 
       {type === "sentence-builder" && (
         <SentenceBuilderFields block={block} set={set} />
@@ -69,6 +81,47 @@ function Field({ label, children, hint }) {
       {children}
       {hint && <span className={styles.fieldHint}>{hint}</span>}
     </label>
+  );
+}
+
+// Ściągawka składni formatowania — działa w polu Polecenie oraz w treści zadań.
+const FORMAT_ROWS = [
+  { syntax: "**tekst**", desc: "pogrubienie", demo: "**hola**" },
+  { syntax: "*tekst*", desc: "kursywa", demo: "*hola*" },
+  { syntax: "==tekst==", desc: "podświetlenie", demo: "==hola==" },
+  { syntax: "{red:tekst}", desc: "kolor (nazwa CSS)", demo: "{red:hola}" },
+  { syntax: "{#e74c3c:tekst}", desc: "kolor (hex)", demo: "{#e74c3c:hola}" },
+];
+
+function FormattingHelp() {
+  return (
+    <div className={styles.formatHelp}>
+      <p className={styles.formatHelpTitle}>
+        Wpisz te znaczniki wprost w tekst polecenia lub odpowiedzi:
+      </p>
+      <table className={styles.formatTable}>
+        <thead>
+          <tr>
+            <th>Wpisujesz</th>
+            <th>Efekt</th>
+            <th>Podgląd</th>
+          </tr>
+        </thead>
+        <tbody>
+          {FORMAT_ROWS.map((r) => (
+            <tr key={r.syntax}>
+              <td><code>{r.syntax}</code></td>
+              <td>{r.desc}</td>
+              <td>{renderRich(r.demo)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className={styles.formatHelpNote}>
+        Można łączyć, np. <code>Uwaga na {"{red:**está**}"}</code>. Kolory
+        przyjmują nazwy CSS (red, blue, green…) albo hex (#e74c3c).
+      </p>
+    </div>
   );
 }
 
@@ -330,7 +383,7 @@ function TrueFalseFields({ block, set }) {
         />
       </Field>
       <div className={styles.row}>
-        <Field label="Tekst lewego przycisku" hint="np. Verdadero, Sí, Bueno">
+        <Field label="Domyślny lewy przycisk" hint="np. Verdadero, Sí, Bueno">
           <input
             className={styles.input}
             value={block.trueLabel ?? ""}
@@ -338,7 +391,7 @@ function TrueFalseFields({ block, set }) {
             placeholder="Prawda"
           />
         </Field>
-        <Field label="Tekst prawego przycisku" hint="np. Falso, No, Malo">
+        <Field label="Domyślny prawy przycisk" hint="np. Falso, No, Malo">
           <input
             className={styles.input}
             value={block.falseLabel ?? ""}
@@ -347,36 +400,68 @@ function TrueFalseFields({ block, set }) {
           />
         </Field>
       </div>
+
+      <label className={styles.checkboxField}>
+        <input
+          type="checkbox"
+          checked={!!block.perRowLabels}
+          onChange={(e) => set({ perRowLabels: e.target.checked })}
+        />
+        <span>Osobne etykiety przycisków dla każdego wiersza</span>
+      </label>
+
       <Field label="Stwierdzenia">
         <div className={styles.list}>
-          {stmts.map((s, i) => (
-            <div key={i} className={styles.optionRow}>
-              <input
-                className={styles.input}
-                value={s.text}
-                onChange={(e) => update(i, "text", e.target.value)}
-                placeholder="Treść stwierdzenia"
-              />
-              <select
-                className={styles.input}
-                style={{ flex: "0 0 100px" }}
-                value={s.answer ? "true" : "false"}
-                onChange={(e) => update(i, "answer", e.target.value === "true")}
-              >
-                <option value="true">Prawda</option>
-                <option value="false">Fałsz</option>
-              </select>
-              <button
-                type="button"
-                className={styles.removeBtn}
-                onClick={() => remove(i)}
-                disabled={stmts.length <= 1}
-                aria-label="Usuń stwierdzenie"
-              >
-                ✕
-              </button>
-            </div>
-          ))}
+          {stmts.map((s, i) => {
+            const tl = s.trueLabel ?? block.trueLabel ?? "Prawda";
+            const fl = s.falseLabel ?? block.falseLabel ?? "Fałsz";
+            return (
+              <div key={i} className={styles.crosswordRow}>
+                <div className={styles.optionRow}>
+                  <input
+                    className={styles.input}
+                    value={s.text}
+                    onChange={(e) => update(i, "text", e.target.value)}
+                    placeholder="Treść stwierdzenia"
+                  />
+                  <select
+                    className={styles.input}
+                    style={{ flex: "0 0 130px" }}
+                    value={s.answer ? "true" : "false"}
+                    onChange={(e) => update(i, "answer", e.target.value === "true")}
+                  >
+                    <option value="true">Poprawne: {tl}</option>
+                    <option value="false">Poprawne: {fl}</option>
+                  </select>
+                  <button
+                    type="button"
+                    className={styles.removeBtn}
+                    onClick={() => remove(i)}
+                    disabled={stmts.length <= 1}
+                    aria-label="Usuń stwierdzenie"
+                  >
+                    ✕
+                  </button>
+                </div>
+                {block.perRowLabels && (
+                  <div className={styles.optionRow}>
+                    <input
+                      className={styles.input}
+                      value={s.trueLabel ?? ""}
+                      onChange={(e) => update(i, "trueLabel", e.target.value)}
+                      placeholder={`lewy przycisk (domyślnie: ${block.trueLabel ?? "Prawda"})`}
+                    />
+                    <input
+                      className={styles.input}
+                      value={s.falseLabel ?? ""}
+                      onChange={(e) => update(i, "falseLabel", e.target.value)}
+                      placeholder={`prawy przycisk (domyślnie: ${block.falseLabel ?? "Fałsz"})`}
+                    />
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
         <button type="button" className={styles.addBtn} onClick={add}>
           + Dodaj stwierdzenie

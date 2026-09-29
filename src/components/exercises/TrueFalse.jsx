@@ -12,12 +12,13 @@ import styles from "./TrueFalse.module.css";
  *   type: "true-false",
  *   badge: "Verdadero / Falso",     // etykieta-plakietka (opcjonalna)
  *   instruction: "Verdadero o falso.",
- *   trueLabel: "Sí",                // tekst lewego przycisku (domyślnie "Prawda")
- *   falseLabel: "No",               // tekst prawego przycisku (domyślnie "Fałsz")
+ *   trueLabel: "Sí",                // domyślny tekst lewego przycisku (fallback "Prawda")
+ *   falseLabel: "No",               // domyślny tekst prawego przycisku (fallback "Fałsz")
  *   timeLimit: 30,                  // sekundy na całość (0/brak = bez limitu)
  *   statements: [
- *     { text: "„Hola” znaczy cześć.", answer: true },
- *     { text: "„Gracias” znaczy proszę.", answer: false },
+ *     // etykiety można nadpisać per wiersz:
+ *     { text: "…", answer: true, trueLabel: "Bueno", falseLabel: "Malo" },
+ *     { text: "…", answer: false },   // bez etykiet -> użyje tych z bloku
  *   ],
  * }
  */
@@ -88,6 +89,9 @@ export default function TrueFalse({ block, onComplete }) {
           const picked = answers[i];
           const isRight = submitted && picked === s.answer;
           const isWrong = submitted && picked !== undefined && picked !== s.answer;
+          // Etykiety per wiersz z fallbackiem na etykiety całego ćwiczenia.
+          const rowTrue = s.trueLabel ?? trueLabel;
+          const rowFalse = s.falseLabel ?? falseLabel;
           return (
             <li
               key={i}
@@ -105,7 +109,7 @@ export default function TrueFalse({ block, onComplete }) {
                   onClick={() => pick(i, true)}
                   disabled={submitted}
                 >
-                  {trueLabel}
+                  {rowTrue}
                 </button>
                 <button
                   type="button"
@@ -115,12 +119,12 @@ export default function TrueFalse({ block, onComplete }) {
                   onClick={() => pick(i, false)}
                   disabled={submitted}
                 >
-                  {falseLabel}
+                  {rowFalse}
                 </button>
               </div>
               {submitted && isWrong && (
                 <span className={styles.correction}>
-                  Poprawnie: {s.answer ? trueLabel : falseLabel}
+                  Poprawnie: {s.answer ? rowTrue : rowFalse}
                 </span>
               )}
             </li>
