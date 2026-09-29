@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { renderRich } from "../../utils/richText";
 import styles from "./Anagram.module.css";
 
 /**
@@ -58,8 +59,8 @@ export default function Anagram({ block, onComplete }) {
   return (
     <div className={`${styles.wrapper} ${status !== "idle" ? styles[status] : ""}`}>
       <p className={styles.instruction}>
-        <span className={styles.badge}>Anagram</span>
-        {block.instruction ?? "Ułóż słowo z liter:"}
+        <span className={styles.badge}>{block.badge ?? "Anagram"}</span>
+        {renderRich(block.instruction ?? "Ułóż słowo z liter:")}
       </p>
 
       {block.hint && (

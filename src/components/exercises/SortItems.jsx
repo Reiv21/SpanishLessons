@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { renderRich } from "../../utils/richText";
 import styles from "./SortItems.module.css";
 
 /**
@@ -74,8 +75,8 @@ export default function SortItems({ block, onComplete }) {
   return (
     <div className={`${styles.wrapper} ${status === "checked" ? styles.done : ""}`}>
       <p className={styles.instruction}>
-        <span className={styles.badge}>Posortuj</span>
-        {block.instruction ?? "Przypisz elementy do kategorii:"}
+        <span className={styles.badge}>{block.badge ?? "Posortuj"}</span>
+        {renderRich(block.instruction ?? "Przypisz elementy do kategorii:")}
       </p>
 
       {/* Bank elementów do rozłożenia */}

@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { asset } from "../../utils/asset";
+import { renderRich } from "../../utils/richText";
 import styles from "./SentenceBuilder.module.css";
 
 /**
@@ -58,8 +59,8 @@ export default function SentenceBuilder({ block, onComplete, completed }) {
   return (
     <div className={`${styles.wrapper} ${status !== "idle" ? styles[status] : ""}`}>
       <p className={styles.instruction}>
-        <span className={styles.badge}>Ćwiczenie</span>
-        {block.instruction ?? "Ułóż poprawne zdanie:"}
+        <span className={styles.badge}>{block.badge ?? "Ćwiczenie"}</span>
+        {renderRich(block.instruction ?? "Ułóż poprawne zdanie:")}
       </p>
 
       {/* Sentence slot */}

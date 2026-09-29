@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { asset } from "../../utils/asset";
+import { renderRich } from "../../utils/richText";
 import styles from "./MultiChoice.module.css";
 
 /**
@@ -62,8 +63,8 @@ export default function MultiChoice({ block, onComplete }) {
   return (
     <div className={`${styles.wrapper} ${submitted ? (isCorrect ? styles.correct : styles.wrong) : ""}`}>
       <p className={styles.instruction}>
-        <span className={styles.badge}>Jak myślisz?</span>
-        {block.instruction}
+        <span className={styles.badge}>{block.badge ?? "Jak myślisz?"}</span>
+        {renderRich(block.instruction)}
       </p>
 
       <div className={styles.options}>

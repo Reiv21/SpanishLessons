@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { asset } from "../../utils/asset";
+import { renderRich } from "../../utils/richText";
 import styles from "./FillBlank.module.css";
 
 // Special characters needed for Spanish writing
@@ -72,8 +73,8 @@ export default function FillBlank({ block, onComplete }) {
     <div className={`${styles.wrapper} ${answered ? styles[status] : ""}`}>
       {/* Label */}
       <p className={styles.instruction}>
-        <span className={styles.badge}>Ćwiczenie</span>
-        {block.instruction ?? "Wpisz brakujące słowo:"}
+        <span className={styles.badge}>{block.badge ?? "Ćwiczenie"}</span>
+        {renderRich(block.instruction ?? "Wpisz brakujące słowo:")}
       </p>
 
       {/* Polish question — always visible */}

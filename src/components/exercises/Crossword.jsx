@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { renderRich } from "../../utils/richText";
 import styles from "./Crossword.module.css";
 
 /**
@@ -51,8 +52,8 @@ export default function Crossword({ block, onComplete }) {
     return (
       <div className={styles.wrapper}>
         <p className={styles.instruction}>
-          <span className={styles.badge}>Krzyżówka</span>
-          {block.instruction ?? "Krzyżówka"}
+          <span className={styles.badge}>{block.badge ?? "Krzyżówka"}</span>
+          {renderRich(block.instruction ?? "Krzyżówka")}
         </p>
         <p className={styles.emptyNote}>
           Ta krzyżówka nie ma jeszcze wpisów. Krzyżówki wprowadza się ręcznie
@@ -75,8 +76,8 @@ export default function Crossword({ block, onComplete }) {
   return (
     <div className={`${styles.wrapper} ${status === "checked" ? styles.done : ""}`}>
       <p className={styles.instruction}>
-        <span className={styles.badge}>Krzyżówka</span>
-        {block.instruction ?? "Rozwiąż krzyżówkę:"}
+        <span className={styles.badge}>{block.badge ?? "Krzyżówka"}</span>
+        {renderRich(block.instruction ?? "Rozwiąż krzyżówkę:")}
       </p>
 
       <div className={styles.layout}>

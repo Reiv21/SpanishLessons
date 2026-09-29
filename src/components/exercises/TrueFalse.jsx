@@ -1,15 +1,20 @@
 import { useState, useEffect, useRef } from "react";
+import { renderRich } from "../../utils/richText";
 import styles from "./TrueFalse.module.css";
 
 /**
- * TrueFalse — seria stwierdzeń, uczeń ocenia każde jako Prawda/Fałsz.
- * Opcjonalny licznik czasu na całość.
+ * TrueFalse — seria stwierdzeń, uczeń ocenia każde dwoma przyciskami.
+ * Etykiety przycisków są konfigurowalne (nie muszą to być "Prawda/Fałsz").
+ * Opcjonalny licznik czasu na całość. Feedback dopiero po "Sprawdź".
  *
  * Data shape:
  * {
  *   type: "true-false",
- *   instruction: "Prawda czy fałsz?",
- *   timeLimit: 30,                 // sekundy na całość (0/brak = bez limitu)
+ *   badge: "Verdadero / Falso",     // etykieta-plakietka (opcjonalna)
+ *   instruction: "Verdadero o falso.",
+ *   trueLabel: "Sí",                // tekst lewego przycisku (domyślnie "Prawda")
+ *   falseLabel: "No",               // tekst prawego przycisku (domyślnie "Fałsz")
+ *   timeLimit: 30,                  // sekundy na całość (0/brak = bez limitu)
  *   statements: [
  *     { text: "„Hola” znaczy cześć.", answer: true },
  *     { text: "„Gracias” znaczy proszę.", answer: false },
@@ -19,6 +24,8 @@ import styles from "./TrueFalse.module.css";
 export default function TrueFalse({ block, onComplete }) {
   const statements = block.statements ?? [];
   const timeLimit = block.timeLimit ?? 0;
+  const trueLabel = block.trueLabel ?? "Prawda";
+  const falseLabel = block.falseLabel ?? "Fałsz";
 
   const [answers, setAnswers] = useState({}); // index -> bool
   const [submitted, setSubmitted] = useState(false);
@@ -66,8 +73,8 @@ export default function TrueFalse({ block, onComplete }) {
     <div className={`${styles.wrapper} ${submitted ? styles.done : ""}`}>
       <div className={styles.header}>
         <p className={styles.instruction}>
-          <span className={styles.badge}>Prawda / Fałsz</span>
-          {block.instruction ?? "Oceń stwierdzenia:"}
+          <span className={styles.badge}>{block.badge ?? "Prawda / Fałsz"}</span>
+          {renderRich(block.instruction ?? "Oceń stwierdzenia:")}
         </p>
         {timeLimit > 0 && !submitted && (
           <span className={`${styles.timer} ${timeLeft <= 5 ? styles.timerLow : ""}`}>
@@ -88,7 +95,7 @@ export default function TrueFalse({ block, onComplete }) {
                 isWrong ? styles.itemWrong : ""
               }`}
             >
-              <span className={styles.statement}>{s.text}</span>
+              <span className={styles.statement}>{renderRich(s.text)}</span>
               <div className={styles.choices}>
                 <button
                   type="button"
@@ -98,7 +105,7 @@ export default function TrueFalse({ block, onComplete }) {
                   onClick={() => pick(i, true)}
                   disabled={submitted}
                 >
-                  Prawda
+                  {trueLabel}
                 </button>
                 <button
                   type="button"
@@ -108,12 +115,12 @@ export default function TrueFalse({ block, onComplete }) {
                   onClick={() => pick(i, false)}
                   disabled={submitted}
                 >
-                  Fałsz
+                  {falseLabel}
                 </button>
               </div>
               {submitted && isWrong && (
                 <span className={styles.correction}>
-                  Poprawnie: {s.answer ? "Prawda" : "Fałsz"}
+                  Poprawnie: {s.answer ? trueLabel : falseLabel}
                 </span>
               )}
             </li>

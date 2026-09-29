@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { asset } from "../../utils/asset";
+import { renderRich } from "../../utils/richText";
 import styles from "./PictureChoice.module.css";
 
 /**
@@ -61,8 +62,8 @@ export default function PictureChoice({ block, onComplete }) {
   return (
     <div className={`${styles.wrapper} ${submitted ? styles.done : ""}`}>
       <p className={styles.instruction}>
-        <span className={styles.badge}>Opisz zdjęcie</span>
-        {block.instruction ?? "Które zdania opisują zdjęcie?"}
+        <span className={styles.badge}>{block.badge ?? "Opisz zdjęcie"}</span>
+        {renderRich(block.instruction ?? "Które zdania opisują zdjęcie?")}
       </p>
 
       {imgSrc ? (
@@ -101,7 +102,7 @@ export default function PictureChoice({ block, onComplete }) {
                     ? "●"
                     : ""}
                 </span>
-                <span>{o.text}</span>
+                <span>{renderRich(o.text)}</span>
               </button>
             </li>
           );

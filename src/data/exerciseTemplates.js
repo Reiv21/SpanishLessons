@@ -24,7 +24,8 @@ export const TEMPLATES = [
     icon: "🔗",
     defaultBlock: {
       type: "match-pairs",
-      instruction: "Połącz słówka z tłumaczeniami:",
+      instruction: "Relaciona español y polaco.",
+      checkMode: "onSubmit",
       pairs: [
         { es: "Hola", pl: "Cześć" },
         { es: "Gracias", pl: "Dziękuję" },
@@ -78,10 +79,13 @@ export const TEMPLATES = [
     icon: "⚖️",
     defaultBlock: {
       type: "true-false",
-      instruction: "Prawda czy fałsz?",
+      badge: "Verdadero o falso",
+      instruction: "¿**Verdadero** o **falso**?",
+      trueLabel: "Verdadero",
+      falseLabel: "Falso",
       timeLimit: 30,
       statements: [
-        { text: "„Hola” znaczy cześć.", answer: true },
+        { text: "„Hola” znaczy ==cześć==.", answer: true },
         { text: "„Gracias” znaczy proszę.", answer: false },
         { text: "„Adiós” znaczy do widzenia.", answer: true },
         { text: "„Gato” znaczy pies.", answer: false },

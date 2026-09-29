@@ -17,13 +17,27 @@ export default function ExerciseEditor({ type, block, onChange, onApply }) {
         onApply();
       }}
     >
-      {/* Wspólne: instrukcja */}
-      <Field label="Polecenie">
+      {/* Wspólne: nazwa (plakietka) + polecenie */}
+      <Field
+        label="Nazwa / plakietka"
+        hint='Krótka etykieta nad ćwiczeniem, np. „Escena 1” albo „Verdadero o falso”.'
+      >
+        <input
+          className={styles.input}
+          value={block.badge ?? ""}
+          onChange={(e) => set({ badge: e.target.value })}
+          placeholder="np. Escena 1. El problema de Przemek"
+        />
+      </Field>
+      <Field
+        label="Polecenie"
+        hint="Można używać **pogrubienia**, *kursywy*, ==podświetlenia== i {czerwony:słowo}."
+      >
         <input
           className={styles.input}
           value={block.instruction ?? ""}
           onChange={(e) => set({ instruction: e.target.value })}
-          placeholder="Treść polecenia dla ucznia"
+          placeholder="np. Relaciona español y polaco."
         />
       </Field>
 
@@ -152,6 +166,20 @@ function MatchPairsFields({ block, set }) {
   const remove = (i) => set({ pairs: pairs.filter((_, idx) => idx !== i) });
 
   return (
+    <>
+      <Field
+        label="Kiedy pokazać wynik"
+        hint="„Na końcu” = uczeń łączy wszystko i dopiero klika Sprawdź (bez prób i błędów)."
+      >
+        <select
+          className={styles.input}
+          value={block.checkMode ?? "immediate"}
+          onChange={(e) => set({ checkMode: e.target.value })}
+        >
+          <option value="immediate">Od razu (po każdym połączeniu)</option>
+          <option value="onSubmit">Na końcu (po kliknięciu „Sprawdź”)</option>
+        </select>
+      </Field>
     <Field label="Pary (hiszpański ↔ polski)">
       <div className={styles.list}>
         {pairs.map((p, i) => (
@@ -185,6 +213,7 @@ function MatchPairsFields({ block, set }) {
         + Dodaj parę
       </button>
     </Field>
+    </>
   );
 }
 
@@ -300,6 +329,24 @@ function TrueFalseFields({ block, set }) {
           onChange={(e) => set({ timeLimit: Number(e.target.value) || 0 })}
         />
       </Field>
+      <div className={styles.row}>
+        <Field label="Tekst lewego przycisku" hint="np. Verdadero, Sí, Bueno">
+          <input
+            className={styles.input}
+            value={block.trueLabel ?? ""}
+            onChange={(e) => set({ trueLabel: e.target.value })}
+            placeholder="Prawda"
+          />
+        </Field>
+        <Field label="Tekst prawego przycisku" hint="np. Falso, No, Malo">
+          <input
+            className={styles.input}
+            value={block.falseLabel ?? ""}
+            onChange={(e) => set({ falseLabel: e.target.value })}
+            placeholder="Fałsz"
+          />
+        </Field>
+      </div>
       <Field label="Stwierdzenia">
         <div className={styles.list}>
           {stmts.map((s, i) => (
