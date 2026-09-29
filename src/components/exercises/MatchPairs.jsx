@@ -129,15 +129,18 @@ function ImmediateMatch({ block, esItems, plItems, onComplete }) {
 /* ── Tryb 2: sprawdzenie na koniec ─────────────────────────────────────── */
 function OnSubmitMatch({ block, esItems, plItems, onComplete }) {
   const pairs = block.pairs;
-  // links: esId -> plId (tymczasowe połączenia ucznia, jeszcze niesprawdzone)
+  // links: esId -> { plId, num }. num to STABILNY numer połączenia (nie zmienia
+  // się przy dodawaniu/usuwaniu innych par), przydzielany z licznika nextNum.
   const [links, setLinks] = useState({});
+  const [nextNum, setNextNum] = useState(1);
   const [selEs, setSelEs] = useState(null);
   const [selPl, setSelPl] = useState(null);
   const [checked, setChecked] = useState(false);
 
   const linkedEs = new Set(Object.keys(links).map(Number));
-  const linkedPl = new Set(Object.values(links));
-  const allLinked = Object.keys(links).length === pairs.length;
+  const linkedPl = new Set(Object.values(links).map((v) => v.plId));
+  const linkCount = Object.keys(links).length;
+  const allLinked = linkCount === pairs.length;
 
   function selectEs(id) {
     if (checked) return;
@@ -148,6 +151,7 @@ function OnSubmitMatch({ block, esItems, plItems, onComplete }) {
         delete n[id];
         return n;
       });
+      setSelEs(null);
       return;
     }
     const next = selEs === id ? null : id;
@@ -159,8 +163,9 @@ function OnSubmitMatch({ block, esItems, plItems, onComplete }) {
     if (linkedPl.has(id)) {
       // rozłącz parę wskazującą na ten PL
       setLinks((l) =>
-        Object.fromEntries(Object.entries(l).filter(([, v]) => v !== id))
+        Object.fromEntries(Object.entries(l).filter(([, v]) => v.plId !== id))
       );
+      setSelPl(null);
       return;
     }
     const next = selPl === id ? null : id;
@@ -168,42 +173,43 @@ function OnSubmitMatch({ block, esItems, plItems, onComplete }) {
     if (selEs !== null && next !== null) link(selEs, next);
   }
   function link(esId, plId) {
-    setLinks((l) => ({ ...l, [esId]: plId }));
+    setLinks((l) => ({ ...l, [esId]: { plId, num: nextNum } }));
+    setNextNum((n) => n + 1);
     setSelEs(null);
     setSelPl(null);
   }
   function check() {
     setChecked(true);
-    const allCorrect = pairs.every((_, i) => links[i] === i);
+    const allCorrect = pairs.every((_, i) => links[i]?.plId === i);
     if (allCorrect) onComplete?.();
   }
   function reset() {
     setLinks({});
+    setNextNum(1);
     setSelEs(null);
     setSelPl(null);
     setChecked(false);
   }
 
-  // numer połączenia (żeby uczeń widział co z czym połączył, bez oceny)
-  const linkNum = {};
-  Object.keys(links).forEach((esId, i) => {
-    linkNum[esId] = i + 1;
+  // odwzorowanie plId -> { esId, num } (do stanu i badge po stronie PL)
+  const plToLink = {};
+  Object.entries(links).forEach(([esId, v]) => {
+    plToLink[v.plId] = { esId: Number(esId), num: v.num };
   });
-  const plToEs = Object.fromEntries(Object.entries(links).map(([e, p]) => [p, e]));
 
   const esState = (id) => {
-    if (checked) return links[id] === id ? "matched" : linkedEs.has(id) ? "wrong" : "idle";
+    if (checked) return links[id]?.plId === id ? "matched" : linkedEs.has(id) ? "wrong" : "idle";
     return selEs === id ? "selected" : linkedEs.has(id) ? "linked" : "idle";
   };
   const plState = (id) => {
     if (checked) {
-      const es = plToEs[id];
-      return es !== undefined && Number(es) === id ? "matched" : linkedPl.has(id) ? "wrong" : "idle";
+      const lk = plToLink[id];
+      return lk && lk.esId === id ? "matched" : linkedPl.has(id) ? "wrong" : "idle";
     }
     return selPl === id ? "selected" : linkedPl.has(id) ? "linked" : "idle";
   };
 
-  const correctCount = pairs.filter((_, i) => links[i] === i).length;
+  const correctCount = pairs.filter((_, i) => links[i]?.plId === i).length;
 
   return (
     <div className={styles.wrapper}>
@@ -213,10 +219,8 @@ function OnSubmitMatch({ block, esItems, plItems, onComplete }) {
         plItems={plItems}
         esState={esState}
         plState={plState}
-        esBadge={(id) => (!checked && linkNum[id] ? linkNum[id] : null)}
-        plBadge={(id) =>
-          !checked && plToEs[id] !== undefined ? linkNum[plToEs[id]] : null
-        }
+        esBadge={(id) => (!checked && links[id] ? links[id].num : null)}
+        plBadge={(id) => (!checked && plToLink[id] ? plToLink[id].num : null)}
         onEs={selectEs}
         onPl={selectPl}
       />
@@ -242,7 +246,7 @@ function OnSubmitMatch({ block, esItems, plItems, onComplete }) {
         )}
         {!checked && (
           <span className={styles.progress}>
-            {Object.keys(links).length} / {pairs.length} połączonych
+            {linkCount} / {pairs.length} połączonych
           </span>
         )}
       </div>
