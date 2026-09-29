@@ -16,14 +16,36 @@ export default function RichInput({ value, onChange, placeholder }) {
   function wrap(before, after, fallback = "tekst") {
     const el = ref.current;
     const v = value ?? "";
-    const start = el?.selectionStart ?? v.length;
-    const end = el?.selectionEnd ?? v.length;
-    const selected = v.slice(start, end) || fallback;
-    const next = v.slice(0, start) + before + selected + after + v.slice(end);
+    let start = el?.selectionStart ?? v.length;
+    let end = el?.selectionEnd ?? v.length;
+
+    // Przytnij zaznaczenie do niepustych znaków (nie owijaj spacji na brzegach).
+    while (start < end && /\s/.test(v[start])) start++;
+    while (end > start && /\s/.test(v[end - 1])) end--;
+
+    const selected = v.slice(start, end);
+
+    // Toggle: jeśli zaznaczenie jest już owinięte w ten sam znacznik, zdejmij go.
+    const outerBefore = v.slice(start - before.length, start);
+    const outerAfter = v.slice(end, end + after.length);
+    if (selected && outerBefore === before && outerAfter === after) {
+      const next =
+        v.slice(0, start - before.length) + selected + v.slice(end + after.length);
+      onChange(next);
+      const ns = start - before.length;
+      requestAnimationFrame(() => {
+        el?.focus();
+        el?.setSelectionRange(ns, ns + selected.length);
+      });
+      return;
+    }
+
+    // Zwykłe owinięcie. Pusty wybór -> wstaw placeholder.
+    const inner = selected || fallback;
+    const next = v.slice(0, start) + before + inner + after + v.slice(end);
     onChange(next);
-    // przywróć zaznaczenie na owiniętym tekście
     const selStart = start + before.length;
-    const selEnd = selStart + selected.length;
+    const selEnd = selStart + inner.length;
     requestAnimationFrame(() => {
       el?.focus();
       el?.setSelectionRange(selStart, selEnd);
