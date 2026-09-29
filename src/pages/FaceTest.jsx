@@ -36,10 +36,6 @@ export default function FaceTest() {
         <h1 style={{ fontSize: "1.4rem", fontWeight: 800, margin: "0 0 6px" }}>
           Test mimik lektora
         </h1>
-        <p style={{ color: "#6a6055", margin: "0 0 24px" }}>
-          Podgląd wszystkich 12 wyrazów z arkusza p2 (lector_faces.png).
-          Jeśli twarze są dobrze wykadrowane, można podłączyć lektora do dialogów.
-        </p>
 
         <div
           style={{
