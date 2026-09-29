@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { renderRich } from "../utils/richText";
+import RichInput from "./RichInput";
 import styles from "./ExerciseEditor.module.css";
 
 /**
@@ -33,15 +34,6 @@ export default function ExerciseEditor({ type, block, onChange, onApply }) {
           placeholder="np. Escena 1. El problema de Przemek"
         />
       </Field>
-      <Field label="Polecenie">
-        <input
-          className={styles.input}
-          value={block.instruction ?? ""}
-          onChange={(e) => set({ instruction: e.target.value })}
-          placeholder="np. Relaciona español y polaco."
-        />
-      </Field>
-
       {/* Tryb zaawansowanego formatowania tekstu */}
       <label className={styles.checkboxField}>
         <input
@@ -51,6 +43,24 @@ export default function ExerciseEditor({ type, block, onChange, onApply }) {
         />
         <span>Zaawansowane formatowanie tekstu</span>
       </label>
+
+      <Field label="Polecenie">
+        {showFormatting ? (
+          <RichInput
+            value={block.instruction ?? ""}
+            onChange={(v) => set({ instruction: v })}
+            placeholder="np. Relaciona español y polaco."
+          />
+        ) : (
+          <input
+            className={styles.input}
+            value={block.instruction ?? ""}
+            onChange={(e) => set({ instruction: e.target.value })}
+            placeholder="np. Relaciona español y polaco."
+          />
+        )}
+      </Field>
+
       {showFormatting && <FormattingHelp />}
 
       {type === "sentence-builder" && (
@@ -58,13 +68,17 @@ export default function ExerciseEditor({ type, block, onChange, onApply }) {
       )}
       {type === "fill-blank" && <FillBlankFields block={block} set={set} />}
       {type === "match-pairs" && <MatchPairsFields block={block} set={set} />}
-      {type === "multi-choice" && <MultiChoiceFields block={block} set={set} />}
-      {type === "true-false" && <TrueFalseFields block={block} set={set} />}
+      {type === "multi-choice" && (
+        <MultiChoiceFields block={block} set={set} rich={showFormatting} />
+      )}
+      {type === "true-false" && (
+        <TrueFalseFields block={block} set={set} rich={showFormatting} />
+      )}
       {type === "anagram" && <AnagramFields block={block} set={set} />}
       {type === "sort-items" && <SortItemsFields block={block} set={set} />}
       {type === "crossword" && <CrosswordFields block={block} set={set} />}
       {type === "picture-choice" && (
-        <PictureChoiceFields block={block} set={set} />
+        <PictureChoiceFields block={block} set={set} rich={showFormatting} />
       )}
 
       <button type="submit" className={styles.applyBtn}>
@@ -81,6 +95,21 @@ function Field({ label, children, hint }) {
       {children}
       {hint && <span className={styles.fieldHint}>{hint}</span>}
     </label>
+  );
+}
+
+// Pole tekstowe: zwykłe albo z paskiem formatowania (gdy rich=true).
+function TextInput({ rich, value, onChange, placeholder }) {
+  if (rich) {
+    return <RichInput value={value} onChange={onChange} placeholder={placeholder} />;
+  }
+  return (
+    <input
+      className={styles.input}
+      value={value ?? ""}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder={placeholder}
+    />
   );
 }
 
@@ -271,7 +300,7 @@ function MatchPairsFields({ block, set }) {
 }
 
 /* ── Multi choice ──────────────────────────────────────────────────────── */
-function MultiChoiceFields({ block, set }) {
+function MultiChoiceFields({ block, set, rich }) {
   const options = block.options;
   const update = (i, key, val) => {
     const next = options.map((o, idx) =>
@@ -321,12 +350,14 @@ function MultiChoiceFields({ block, set }) {
                 onChange={() => setCorrect(i)}
                 aria-label="Poprawna odpowiedź"
               />
-              <input
-                className={styles.input}
-                value={o.text}
-                onChange={(e) => update(i, "text", e.target.value)}
-                placeholder="Treść odpowiedzi"
-              />
+              <div style={{ flex: 1 }}>
+                <TextInput
+                  rich={rich}
+                  value={o.text}
+                  onChange={(v) => update(i, "text", v)}
+                  placeholder="Treść odpowiedzi"
+                />
+              </div>
               <button
                 type="button"
                 className={styles.removeBtn}
@@ -363,7 +394,7 @@ function MultiChoiceFields({ block, set }) {
 }
 
 /* ── True / False ──────────────────────────────────────────────────────── */
-function TrueFalseFields({ block, set }) {
+function TrueFalseFields({ block, set, rich }) {
   const stmts = block.statements ?? [];
   const update = (i, key, val) =>
     set({ statements: stmts.map((s, idx) => (idx === i ? { ...s, [key]: val } : s)) });
@@ -408,12 +439,14 @@ function TrueFalseFields({ block, set }) {
             return (
               <div key={i} className={styles.crosswordRow}>
                 <div className={styles.optionRow}>
-                  <input
-                    className={styles.input}
-                    value={s.text}
-                    onChange={(e) => update(i, "text", e.target.value)}
-                    placeholder="Treść stwierdzenia"
-                  />
+                  <div style={{ flex: 1 }}>
+                    <TextInput
+                      rich={rich}
+                      value={s.text}
+                      onChange={(v) => update(i, "text", v)}
+                      placeholder="Treść stwierdzenia"
+                    />
+                  </div>
                   <button
                     type="button"
                     className={styles.removeBtn}
@@ -550,7 +583,7 @@ function SortItemsFields({ block, set }) {
 }
 
 /* ── Picture choice (opis zdjęcia + upload) ────────────────────────────── */
-function PictureChoiceFields({ block, set }) {
+function PictureChoiceFields({ block, set, rich }) {
   const options = block.options ?? [];
   const update = (i, key, val) =>
     set({ options: options.map((o, idx) => (idx === i ? { ...o, [key]: val } : o)) });
@@ -629,12 +662,14 @@ function PictureChoiceFields({ block, set }) {
                 onChange={() => setCorrect(i)}
                 aria-label="Poprawne zdanie"
               />
-              <input
-                className={styles.input}
-                value={o.text}
-                onChange={(e) => update(i, "text", e.target.value)}
-                placeholder="Zdanie po hiszpańsku"
-              />
+              <div style={{ flex: 1 }}>
+                <TextInput
+                  rich={rich}
+                  value={o.text}
+                  onChange={(v) => update(i, "text", v)}
+                  placeholder="Zdanie po hiszpańsku"
+                />
+              </div>
               <button
                 type="button"
                 className={styles.removeBtn}

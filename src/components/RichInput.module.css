@@ -1,0 +1,60 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.toolbar {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid #e2d8c8;
+  background: #fffdf9;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a4034;
+  transition: border-color 0.12s, background 0.12s;
+  padding: 0;
+}
+.btn:hover {
+  border-color: #e74c3c;
+  background: #fff3ee;
+}
+
+.hl {
+  background: #fff3b0;
+  padding: 0 3px;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+/* przyciski kolorów pokazują literę A w danym kolorze */
+.red { color: #e74c3c; font-weight: 800; }
+.blue { color: #2980b9; font-weight: 800; }
+.green { color: #27ae60; font-weight: 800; }
+
+.input {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1.5px solid #e2d8c8;
+  border-radius: 9px;
+  font-size: 0.92rem;
+  font-family: inherit;
+  color: #1a1a2e;
+  background: #fffdf9;
+  box-sizing: border-box;
+  transition: border-color 0.12s;
+}
+.input:focus {
+  outline: none;
+  border-color: #e74c3c;
+}
