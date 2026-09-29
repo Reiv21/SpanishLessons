@@ -367,9 +367,23 @@ function TrueFalseFields({ block, set }) {
   const stmts = block.statements ?? [];
   const update = (i, key, val) =>
     set({ statements: stmts.map((s, idx) => (idx === i ? { ...s, [key]: val } : s)) });
-  const add = () => set({ statements: [...stmts, { text: "", answer: true }] });
   const remove = (i) =>
     set({ statements: stmts.filter((_, idx) => idx !== i) });
+  // Nowe stwierdzenie dziedziczy etykiety z ostatniego wiersza (albo Prawda/Fałsz).
+  const add = () => {
+    const prev = stmts[stmts.length - 1];
+    set({
+      statements: [
+        ...stmts,
+        {
+          text: "",
+          answer: true,
+          trueLabel: prev?.trueLabel ?? "Prawda",
+          falseLabel: prev?.falseLabel ?? "Fałsz",
+        },
+      ],
+    });
+  };
 
   return (
     <>
@@ -382,39 +396,15 @@ function TrueFalseFields({ block, set }) {
           onChange={(e) => set({ timeLimit: Number(e.target.value) || 0 })}
         />
       </Field>
-      <div className={styles.row}>
-        <Field label="Domyślny lewy przycisk" hint="np. Verdadero, Sí, Bueno">
-          <input
-            className={styles.input}
-            value={block.trueLabel ?? ""}
-            onChange={(e) => set({ trueLabel: e.target.value })}
-            placeholder="Prawda"
-          />
-        </Field>
-        <Field label="Domyślny prawy przycisk" hint="np. Falso, No, Malo">
-          <input
-            className={styles.input}
-            value={block.falseLabel ?? ""}
-            onChange={(e) => set({ falseLabel: e.target.value })}
-            placeholder="Fałsz"
-          />
-        </Field>
-      </div>
 
-      <label className={styles.checkboxField}>
-        <input
-          type="checkbox"
-          checked={!!block.perRowLabels}
-          onChange={(e) => set({ perRowLabels: e.target.checked })}
-        />
-        <span>Osobne etykiety przycisków dla każdego wiersza</span>
-      </label>
-
-      <Field label="Stwierdzenia">
+      <Field
+        label="Stwierdzenia"
+        hint="Każdy wiersz ma własne etykiety przycisków (np. Verdadero/Falso). Nowy wiersz kopiuje je z poprzedniego."
+      >
         <div className={styles.list}>
           {stmts.map((s, i) => {
-            const tl = s.trueLabel ?? block.trueLabel ?? "Prawda";
-            const fl = s.falseLabel ?? block.falseLabel ?? "Fałsz";
+            const tl = s.trueLabel ?? "Prawda";
+            const fl = s.falseLabel ?? "Fałsz";
             return (
               <div key={i} className={styles.crosswordRow}>
                 <div className={styles.optionRow}>
@@ -424,15 +414,6 @@ function TrueFalseFields({ block, set }) {
                     onChange={(e) => update(i, "text", e.target.value)}
                     placeholder="Treść stwierdzenia"
                   />
-                  <select
-                    className={styles.input}
-                    style={{ flex: "0 0 130px" }}
-                    value={s.answer ? "true" : "false"}
-                    onChange={(e) => update(i, "answer", e.target.value === "true")}
-                  >
-                    <option value="true">Poprawne: {tl}</option>
-                    <option value="false">Poprawne: {fl}</option>
-                  </select>
                   <button
                     type="button"
                     className={styles.removeBtn}
@@ -443,22 +424,32 @@ function TrueFalseFields({ block, set }) {
                     ✕
                   </button>
                 </div>
-                {block.perRowLabels && (
-                  <div className={styles.optionRow}>
-                    <input
-                      className={styles.input}
-                      value={s.trueLabel ?? ""}
-                      onChange={(e) => update(i, "trueLabel", e.target.value)}
-                      placeholder={`lewy przycisk (domyślnie: ${block.trueLabel ?? "Prawda"})`}
-                    />
-                    <input
-                      className={styles.input}
-                      value={s.falseLabel ?? ""}
-                      onChange={(e) => update(i, "falseLabel", e.target.value)}
-                      placeholder={`prawy przycisk (domyślnie: ${block.falseLabel ?? "Fałsz"})`}
-                    />
-                  </div>
-                )}
+                <div className={styles.optionRow}>
+                  <input
+                    className={styles.input}
+                    value={tl}
+                    onChange={(e) => update(i, "trueLabel", e.target.value)}
+                    placeholder="lewy przycisk"
+                    aria-label="Tekst lewego przycisku"
+                  />
+                  <input
+                    className={styles.input}
+                    value={fl}
+                    onChange={(e) => update(i, "falseLabel", e.target.value)}
+                    placeholder="prawy przycisk"
+                    aria-label="Tekst prawego przycisku"
+                  />
+                  <select
+                    className={styles.input}
+                    style={{ flex: "0 0 150px" }}
+                    value={s.answer ? "true" : "false"}
+                    onChange={(e) => update(i, "answer", e.target.value === "true")}
+                    aria-label="Która odpowiedź jest poprawna"
+                  >
+                    <option value="true">Poprawne: {tl}</option>
+                    <option value="false">Poprawne: {fl}</option>
+                  </select>
+                </div>
               </div>
             );
           })}
